@@ -1,5 +1,17 @@
 # Comebuyn_v2
 
+Currently hosted at https://comebuyn-210014.firebaseapp.com/
+
+## Dependancies
+
+Nodejs
+Angular CLI
+
+Install node packages for project using:
+```
+npm install
+```
+
 ## Deployment
 
 Ensure firebase tools is installed 
