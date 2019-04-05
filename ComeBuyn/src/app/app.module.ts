@@ -12,6 +12,7 @@ import { NavbarComponent } from './navbar/navbar.component';
 import { HomeComponent } from './home/home.component';
 import { LoginComponent } from './login/login.component';
 import { RouterModule } from '@angular/router';
+import { AuthService } from './auth.service';
 
 @NgModule({
   declarations: [
@@ -32,7 +33,9 @@ import { RouterModule } from '@angular/router';
       { path: 'login', component: LoginComponent }
     ])
   ],
-  providers: [],
+  providers: [
+    AuthService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
