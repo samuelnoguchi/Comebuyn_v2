@@ -42,7 +42,7 @@ import { AdminProductsComponent } from './admin/admin-products/admin-products.co
       { path: 'my-orders', component: MyOrdersComponent, canActivate: [AuthGuard] },
       { path: 'order-success', component: OrderSuccessComponent, canActivate: [AuthGuard] },
       
-      { path: 'admin-products', component: AdminProductsComponent, canActivate:[AuthGuard] }
+      { path: 'admin/products', component: AdminProductsComponent, canActivate:[AuthGuard] }
     ])
   ],
   providers: [

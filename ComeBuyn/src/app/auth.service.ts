@@ -17,7 +17,8 @@ export class AuthService {
 
   login(){
     // If a return url is present save it in variable
-    let returnUrl = this.route.snapshot.queryParamMap.get('returnUrl' || '/');
+    let returnUrl = this.route.snapshot.queryParamMap.get('returnUrl') || '/';
+    console.log(returnUrl);
     
     // login, navigating to the return url afterwards if necissary
     this.afAuth.auth.signInWithPopup(new firebase.auth.GoogleAuthProvider())
