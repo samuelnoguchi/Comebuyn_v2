@@ -13,13 +13,20 @@ import { HomeComponent } from './home/home.component';
 import { LoginComponent } from './login/login.component';
 import { RouterModule } from '@angular/router';
 import { AuthService } from './auth.service';
+import { AuthGuard } from './auth-guard.service';
+import { MyOrdersComponent } from './my-orders/my-orders.component';
+import { OrderSuccessComponent } from './order-success/order-success.component';
+import { AdminProductsComponent } from './admin/admin-products/admin-products.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     NavbarComponent,
     HomeComponent,
-    LoginComponent
+    LoginComponent,
+    MyOrdersComponent,
+    OrderSuccessComponent,
+    AdminProductsComponent
   ],
   imports: [
     BrowserModule,
@@ -30,11 +37,17 @@ import { AuthService } from './auth.service';
     NgbModule.forRoot(),
     RouterModule.forRoot([
       { path: '', component: HomeComponent},
-      { path: 'login', component: LoginComponent }
+      { path: 'login', component: LoginComponent },
+      
+      { path: 'my-orders', component: MyOrdersComponent, canActivate: [AuthGuard] },
+      { path: 'order-success', component: OrderSuccessComponent, canActivate: [AuthGuard] },
+      
+      { path: 'admin-products', component: AdminProductsComponent, canActivate:[AuthGuard] }
     ])
   ],
   providers: [
-    AuthService
+    AuthService,
+    AuthGuard
   ],
   bootstrap: [AppComponent]
 })
