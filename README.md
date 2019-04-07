@@ -4,8 +4,8 @@ Currently hosted at https://comebuyn-210014.firebaseapp.com/
 
 ## Dependancies
 
-Nodejs
-Angular CLI
+1. Nodejs
+2. Angular CLI
 
 Install node packages for project using:
 ```
