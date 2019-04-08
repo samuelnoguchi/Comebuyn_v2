@@ -17,6 +17,11 @@ export class NavbarComponent
     });
   }
 
+  login(){
+    this.auth.login();
+  }
+
+
   logout(){
     this.auth.logout();
   }
