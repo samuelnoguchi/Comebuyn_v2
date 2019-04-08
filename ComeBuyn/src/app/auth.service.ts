@@ -4,6 +4,9 @@ import * as firebase from 'firebase'
 import { Observable } from 'rxjs';
 import { ActivatedRoute, Router } from '@angular/router';
 import { UserService } from './user.service';
+import { AppUser } from './modules/app-user';
+import { switchMap } from 'rxjs/operators';
+import 'rxjs/add/observable/of';
 
 @Injectable({
   providedIn: 'root'
@@ -39,5 +42,12 @@ export class AuthService {
     this.afAuth.auth.signOut();
   }
 
-
+  get appUser$(): Observable<AppUser>{
+    return this.user$.pipe(
+      switchMap(user => {
+        if(user) return this.userService.get(user.uid).valueChanges(); // If firebase user is logged in get db info
+        return Observable.of(null); // otherwise return observable with value null
+      })
+    )
+  }
 }
