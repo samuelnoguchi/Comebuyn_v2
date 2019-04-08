@@ -33,7 +33,6 @@ export class AuthService {
             this.router.navigate([returnUrl]);
           }
         });
-        
       });
   }
   logout(){
