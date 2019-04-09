@@ -49,7 +49,6 @@ export class ProductService {
 //  price: number
 //  title: string
 
-
   get(productId):AngularFireObject<Product>{
     return this.db.object('/products/' + productId);
   }

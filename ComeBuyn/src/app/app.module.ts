@@ -24,6 +24,7 @@ import { AdminAuthGuard } from './admin-auth-guard.service';
 import { ProductFormComponent } from './admin/product-form/product-form.component';
 import { CategoryService } from './category.service';
 import { ProductService } from './product.service';
+import { ProductsComponent } from './products/products.component';
 
 @NgModule({
   declarations: [
@@ -34,7 +35,8 @@ import { ProductService } from './product.service';
     MyOrdersComponent,
     OrderSuccessComponent,
     AdminProductsComponent,
-    ProductFormComponent
+    ProductFormComponent,
+    ProductsComponent
   ],
   imports: [
     BrowserModule,
@@ -48,6 +50,7 @@ import { ProductService } from './product.service';
     RouterModule.forRoot([
       { path: '', component: HomeComponent},
       { path: 'login', component: LoginComponent },
+      { path: 'products', component: ProductsComponent },
       
       { path: 'my-orders', component: MyOrdersComponent, canActivate: [AuthGuard] },
       { path: 'order-success', component: OrderSuccessComponent, canActivate: [AuthGuard] },
