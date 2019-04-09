@@ -23,7 +23,8 @@ export class ProductService {
   }
 
   getAll() {
-    return this.db.list('/products').snapshotChanges().pipe(map(action => {
+    return this.db.list('/products').snapshotChanges().pipe(
+      map(action => {
       return action.map(
         item => {
           const $key = item.payload.key;
@@ -32,6 +33,15 @@ export class ProductService {
       });
     }));
   }
+
+//  data is returned as an observable with object structure:  
+//  $key: string
+//  category: string
+//  imageUrl: string
+//  numBuyersRequired: number
+//  price: number
+//  title: string
+
 
   get(productId){
     return this.db.object('/products/' + productId).valueChanges();
