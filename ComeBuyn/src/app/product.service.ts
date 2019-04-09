@@ -25,6 +25,14 @@ export class ProductService {
     return this.db.object('/products/' + productId).remove();
   }
 
+//  data is returned as an observable with object structure:  
+//  $key: string
+//  category: string
+//  imageUrl: string
+//  numBuyersRequired: number
+//  price: number
+//  title: string
+
   getAll() {
     let afList = this.db.list('/products');
     
@@ -57,15 +65,13 @@ export class ProductService {
       map(action => {
       return action.map(
         item => {
-          //console.log(item.payload.val())
           const $key = item.payload.key;
           const data = { $key, ...item.payload.val() };
-          
-          //console.log(data)
           return data;
       });
     }));
   }
+
 
   get(productId):AngularFireObject<Product>{
     return this.db.object('/products/' + productId);

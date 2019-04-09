@@ -19,12 +19,13 @@ export class ProductsComponent {
     this.products$ = productService.getAll();
     this.categories$ = categoryService.getAll();
     
-
     route.queryParamMap.subscribe(params => {
       console.log(params);
       this.category = params.get('category');
-      this.products$ = productService.getAllByCategory(this.category);
+      console.log(this.category)
+      if(this.category) {
+        this.products$ = productService.getAllByCategory(this.category);
       }
-    )
-  }
+    }
+  )}
 }
