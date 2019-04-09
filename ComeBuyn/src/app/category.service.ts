@@ -8,15 +8,29 @@ import { map } from 'rxjs/operators';
 })
 export class CategoryService {
 
-  observableCategories$: Observable<any[]>;
+  observableCategories$: any;
 
   constructor(private db: AngularFireDatabase) {
-    this.observableCategories$ = this.db.list('/categories', ref => ref.orderByChild('name')).valueChanges();
+    this.observableCategories$ = this.db.list('/categories', ref => ref.orderByChild('name'));
    }
 
   getAll() {
-    return this.observableCategories$;
+    return this.db.list('/categories', ref => ref.orderByChild('name')).snapshotChanges().pipe(
+      map(action=> {
+        return action.map(
+          item=>{
+            const $key = item.payload.key;
+            const data = { $key, ...item.payload.val() };
+            return data;
+          }
+        )
+      })
+    )
   }
+
+//  data is returned as an observable with object structure:  
+//  $key: string
+//  name: string
 
   getAll2() {
     let afList = this.db.list('/products');

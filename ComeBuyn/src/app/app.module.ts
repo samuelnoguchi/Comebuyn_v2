@@ -51,6 +51,7 @@ import { ProductsComponent } from './products/products.component';
       { path: '', component: HomeComponent},
       { path: 'login', component: LoginComponent },
       { path: 'products', component: ProductsComponent },
+      { path: 'products/:category', component: ProductsComponent },
       
       { path: 'my-orders', component: MyOrdersComponent, canActivate: [AuthGuard] },
       { path: 'order-success', component: OrderSuccessComponent, canActivate: [AuthGuard] },

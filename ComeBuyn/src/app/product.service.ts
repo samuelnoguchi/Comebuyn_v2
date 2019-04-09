@@ -4,6 +4,7 @@ import { map } from 'rxjs/operators';
 import { Observable } from 'rxjs';
 import { Product } from './modules/product';
 
+
 @Injectable({
   providedIn: 'root'
 })
@@ -48,6 +49,23 @@ export class ProductService {
 //  numBuyersRequired: number
 //  price: number
 //  title: string
+
+  getAllByCategory(category:string) {
+    let afList = this.db.list('/products', ref=> ref.orderByChild('category').equalTo(category));
+    
+    return afList.snapshotChanges().pipe(
+      map(action => {
+      return action.map(
+        item => {
+          //console.log(item.payload.val())
+          const $key = item.payload.key;
+          const data = { $key, ...item.payload.val() };
+          
+          //console.log(data)
+          return data;
+      });
+    }));
+  }
 
   get(productId):AngularFireObject<Product>{
     return this.db.object('/products/' + productId);
