@@ -20,6 +20,9 @@ export class ProductPageComponent {
     imageUrl:null,
     title:null
   };
+  numAvailable:number[];
+  image:string;
+  quantitySelection: number;
 
   constructor(private productService: ProductService, private route: ActivatedRoute) { 
       // Subscribe to the route
@@ -27,8 +30,19 @@ export class ProductPageComponent {
         this.productId = params.get('productId');
       });
 
+      this.quantitySelection = 1;
+      this.image = "https://increasify.com.au/wp-content/uploads/2016/08/default-image.png" // default
+
       productService.get(this.productId).valueChanges().subscribe(
-        product=> this.product = product
+        product=> {
+          this.product = product;
+          this.image = this.product.imageUrl;
+          this.numAvailable = Array(this.product.numBuyersRequired).fill(0).map((x,i)=>i+1);
+       
+        }
       );
+
+      
+
     }
 }

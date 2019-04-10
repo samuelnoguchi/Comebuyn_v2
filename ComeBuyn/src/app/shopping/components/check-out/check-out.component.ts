@@ -1,15 +1,16 @@
 import { Component, OnInit } from '@angular/core';
+import { ProductService } from 'shared/services/product.service';
 
 @Component({
   selector: 'app-check-out',
   templateUrl: './check-out.component.html',
   styleUrls: ['./check-out.component.css']
 })
-export class CheckOutComponent implements OnInit {
+export class CheckOutComponent {
 
-  constructor() { }
+  constructor(private productService: ProductService) { }
 
-  ngOnInit() {
+  joinCircle(){
+
   }
-
 }
