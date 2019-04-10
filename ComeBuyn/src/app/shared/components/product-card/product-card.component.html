@@ -5,7 +5,7 @@
   <div class="card-body">
     <div class="card-body-content">
         <h5 class="card-title">{{ product.title }}</h5>
-        <p class="card-text">{{ product.price | currency:'USD':symbol }}</p>
+        <p class="card-text">{{ product.price | currency:'USD':true }}</p>
         <a href="#" class="btn btn-primary">Add to Cart</a>
     </div>   
   </div>
