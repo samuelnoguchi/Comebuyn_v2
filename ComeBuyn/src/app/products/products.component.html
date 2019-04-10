@@ -12,25 +12,13 @@
         {{ c.name }} 
       </a>
     </div>
-    
   </div>
   <div class="col-9">
     <div class="album py-5 bg-light">
         <div class="container">
             <div class="row">
             <div *ngFor="let p of products$ | async" class="col-md-4 d-flex align-items-stretch">
-              <div class="card mb-4 shadow-sm">
-                <div class="img-container">
-                    <img class="card-img-top img-responsive" [src]="p.imageUrl" alt="Card image cap">
-                </div>
-                <div class="card-body">
-                  <div class="card-body-content">
-                      <h5 class="card-title">{{ p.title }}</h5>
-                      <p class="card-text">{{ p.price | currency:'USD':symbol }}</p>
-                      <a href="#" class="btn btn-primary">Add to Cart</a>
-                  </div>   
-                </div>
-              </div>
+              <product-card [product]="p"></product-card>
             </div>
           </div>
         </div>
