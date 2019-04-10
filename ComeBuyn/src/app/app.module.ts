@@ -10,9 +10,9 @@ import { CustomFormsModule } from 'ng2-validation';
 import { AuthGuard } from 'shared/services/auth-guard.service';
 
 import { environment } from './../environments/environment';
-import { AdminAuthGuard } from './admin-auth-guard.service';
-import { AdminProductsComponent } from './admin/admin-products/admin-products.component';
-import { ProductFormComponent } from './admin/product-form/product-form.component';
+import { AdminAuthGuard } from './admin/services/admin-auth-guard.service';
+import { AdminProductsComponent } from './admin/components/admin-products/admin-products.component';
+import { ProductFormComponent } from './admin/components/product-form/product-form.component';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HomeComponent } from './home/home.component';
@@ -23,6 +23,7 @@ import { OrderSuccessComponent } from './order-success/order-success.component';
 import { ProductFilterComponent } from './products/product-filter/product-filter.component';
 import { ProductsComponent } from './products/products.component';
 import { SharedModule } from 'shared/shared.module';
+import { AdminModule } from './admin/admin.module';
 
 @NgModule({
   declarations: [
@@ -32,14 +33,13 @@ import { SharedModule } from 'shared/shared.module';
     LoginComponent,
     MyOrdersComponent,
     OrderSuccessComponent,
-    AdminProductsComponent,
-    ProductFormComponent,
     ProductsComponent,
     ProductFilterComponent
   ],
   imports: [
     BrowserModule,
     SharedModule,
+    AdminModule,
     FormsModule,
     CustomFormsModule,
     AppRoutingModule,
@@ -54,19 +54,9 @@ import { SharedModule } from 'shared/shared.module';
       { path: 'products/:category', component: ProductsComponent },
       
       { path: 'my-orders', component: MyOrdersComponent, canActivate: [AuthGuard] },
-      { path: 'order-success', component: OrderSuccessComponent, canActivate: [AuthGuard] },
+      { path: 'order-success', component: OrderSuccessComponent, canActivate: [AuthGuard] }
       
-      { path: 'admin/products', 
-        component: AdminProductsComponent, 
-        canActivate:[AuthGuard, AdminAuthGuard] },
-      
-      { path: 'admin/products/new', 
-        component: ProductFormComponent, 
-        canActivate:[AuthGuard, AdminAuthGuard] },
-        
-      { path: 'admin/products/:id', 
-        component: ProductFormComponent, 
-        canActivate:[AuthGuard, AdminAuthGuard] }
+     
 
     ])
   ],

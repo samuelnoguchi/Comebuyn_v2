@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { CanActivate } from '@angular/router/src/utils/preactivation';
 import { AuthService } from 'shared/services/auth.service';
-import { map, switchMap } from 'rxjs/operators';
+import { map } from 'rxjs/operators';
 import { UserService } from 'shared/services/user.service';
 import { Observable } from 'rxjs';
 
