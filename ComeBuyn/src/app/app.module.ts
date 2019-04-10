@@ -8,38 +8,33 @@ import { RouterModule } from '@angular/router';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { CustomFormsModule } from 'ng2-validation';
 import { AuthGuard } from 'shared/services/auth-guard.service';
+import { SharedModule } from 'shared/shared.module';
 
 import { environment } from './../environments/environment';
+import { AdminModule } from './admin/admin.module';
 import { AdminAuthGuard } from './admin/services/admin-auth-guard.service';
-import { AdminProductsComponent } from './admin/components/admin-products/admin-products.component';
-import { ProductFormComponent } from './admin/components/product-form/product-form.component';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HomeComponent } from './home/home.component';
 import { LoginComponent } from './login/login.component';
-import { MyOrdersComponent } from './my-orders/my-orders.component';
 import { NavbarComponent } from './navbar/navbar.component';
-import { OrderSuccessComponent } from './order-success/order-success.component';
-import { ProductFilterComponent } from './products/product-filter/product-filter.component';
-import { ProductsComponent } from './products/products.component';
-import { SharedModule } from 'shared/shared.module';
-import { AdminModule } from './admin/admin.module';
+import { MyOrdersComponent } from './shopping/components/my-orders/my-orders.component';
+import { OrderSuccessComponent } from './shopping/components/order-success/order-success.component';
+import { ProductsComponent } from './shopping/components/products/products.component';
+import { ShoppingModule } from './shopping/shopping.module';
 
 @NgModule({
   declarations: [
     AppComponent,
     NavbarComponent,
     HomeComponent,
-    LoginComponent,
-    MyOrdersComponent,
-    OrderSuccessComponent,
-    ProductsComponent,
-    ProductFilterComponent
+    LoginComponent
   ],
   imports: [
     BrowserModule,
     SharedModule,
     AdminModule,
+    ShoppingModule,
     FormsModule,
     CustomFormsModule,
     AppRoutingModule,
@@ -50,11 +45,8 @@ import { AdminModule } from './admin/admin.module';
     RouterModule.forRoot([
       { path: '', component: HomeComponent},
       { path: 'login', component: LoginComponent },
-      { path: 'products', component: ProductsComponent },
-      { path: 'products/:category', component: ProductsComponent },
       
-      { path: 'my-orders', component: MyOrdersComponent, canActivate: [AuthGuard] },
-      { path: 'order-success', component: OrderSuccessComponent, canActivate: [AuthGuard] }
+
       
      
 
