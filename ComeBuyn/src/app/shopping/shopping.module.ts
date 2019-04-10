@@ -1,12 +1,12 @@
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { MyOrdersComponent } from './components/my-orders/my-orders.component';
-import { OrderSuccessComponent } from './components/order-success/order-success.component';
-import { ProductsComponent } from './components/products/products.component';
-import { ProductFilterComponent } from './components/products/product-filter/product-filter.component';
 import { RouterModule } from '@angular/router';
 import { AuthGuard } from 'shared/services/auth-guard.service';
 import { SharedModule } from 'shared/shared.module';
+
+import { MyOrdersComponent } from './components/my-orders/my-orders.component';
+import { OrderSuccessComponent } from './components/order-success/order-success.component';
+import { ProductFilterComponent } from './components/products/product-filter/product-filter.component';
+import { ProductsComponent } from './components/products/products.component';
 
 @NgModule({
   declarations: [
@@ -16,7 +16,6 @@ import { SharedModule } from 'shared/shared.module';
     ProductFilterComponent
   ],
   imports: [
-    CommonModule,
     SharedModule,
     RouterModule.forChild([
       { path: 'products', component: ProductsComponent },
