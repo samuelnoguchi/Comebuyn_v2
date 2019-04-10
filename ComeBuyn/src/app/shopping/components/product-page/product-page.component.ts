@@ -24,6 +24,7 @@ export class ProductPageComponent {
   image:string;
   quantitySelection: number;
 
+
   constructor(private productService: ProductService, private route: ActivatedRoute, private router:Router) { 
       // Subscribe to the route
       route.queryParamMap.subscribe(params => {
