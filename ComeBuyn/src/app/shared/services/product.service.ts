@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
 import { AngularFireDatabase, AngularFireObject } from '@angular/fire/database';
 import { map } from 'rxjs/operators';
-import { Observable } from 'rxjs';
 import { Product } from 'shared/models/product';
 
 
@@ -14,6 +13,8 @@ export class ProductService {
 
   
   create(product){
+    // Add field for number of buyers
+    product.numBuyers = 0;
     return this.db.list('/products').push(product);
   }
 

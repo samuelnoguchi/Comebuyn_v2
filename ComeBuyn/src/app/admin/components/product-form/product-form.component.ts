@@ -17,6 +17,7 @@ export class ProductFormComponent implements OnInit {
   product:Product={
     $key:null,
     category:null,
+    numBuyers:null,
     numBuyersRequired:null,
     price:null,
     imageUrl:null,
@@ -37,7 +38,11 @@ export class ProductFormComponent implements OnInit {
       ) 
 
       this.id = this.route.snapshot.paramMap.get('id');
-      if (this.id) this.productService.get(this.id).valueChanges().take(1).subscribe(p=> this.product = p);
+      if (this.id) this.productService.get(this.id).valueChanges().take(1)
+        .subscribe(p=> {
+          this.product = p
+          console.log(this.product);
+        });
 
   }
 

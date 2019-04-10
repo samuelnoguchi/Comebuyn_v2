@@ -1,0 +1,17 @@
+<div class="row featurette">
+    <div class="col-md-7">
+      <h2 class="featurette-heading"> {{ product.title }} </h2>
+      <p class="lead"> {{ product.category }}  </p>
+
+      <p> {{ product.price | currency:'USD':true }} </p>
+
+      <p> {{ product.numBuyers }} / {{ product.numBuyersRequired }} </p>
+
+      <a class="btn btn-primary">Join Circle</a>
+
+
+    </div>
+    <div class="col-md-5">
+      <img class="featurette-image img-fluid mx-auto" [src]="product.imageUrl">
+    </div>
+  </div>
