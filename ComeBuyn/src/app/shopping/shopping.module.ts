@@ -8,6 +8,7 @@ import { OrderSuccessComponent } from './components/order-success/order-success.
 import { ProductFilterComponent } from './components/products/product-filter/product-filter.component';
 import { ProductsComponent } from './components/products/products.component';
 import { ProductPageComponent } from './components/product-page/product-page.component';
+import { CheckOutComponent } from './components/check-out/check-out.component';
 
 @NgModule({
   declarations: [
@@ -15,12 +16,15 @@ import { ProductPageComponent } from './components/product-page/product-page.com
     OrderSuccessComponent,
     ProductsComponent,
     ProductFilterComponent,
-    ProductPageComponent
+    ProductPageComponent,
+    CheckOutComponent
   ],
   imports: [
     SharedModule,
     RouterModule.forChild([
       { path: 'product-page', component: ProductPageComponent },
+      { path: 'check-out', component: CheckOutComponent },
+     
 
       { path: 'products', component: ProductsComponent },
       { path: 'products/:category', component: ProductsComponent },
