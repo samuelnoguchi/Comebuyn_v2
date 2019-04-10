@@ -1,8 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { ProductService } from '../product.service';
-import { CategoryService } from '../category.service';
 import { ActivatedRoute } from '@angular/router';
-import { Product } from '../modules/product';
+
 
 @Component({
   selector: 'app-products',
@@ -11,20 +10,22 @@ import { Product } from '../modules/product';
 })
 export class ProductsComponent {
   products$;
-  filteredProducts: {}[];
-  categories$;
   category: string;
 
-  constructor(productService: ProductService, private categoryService: CategoryService, private route: ActivatedRoute) { 
+  constructor(productService: ProductService, private route: ActivatedRoute) { 
+    // Get all products
     this.products$ = productService.getAll();
-    this.categories$ = categoryService.getAll();
     
+    // Subscribe to the route
     route.queryParamMap.subscribe(params => {
-      console.log(params);
       this.category = params.get('category');
-      console.log(this.category)
+      //If a category has been selected
       if(this.category) {
         this.products$ = productService.getAllByCategory(this.category);
+      }
+      // Otherwise get all products
+      else{
+        this.products$ = productService.getAll();
       }
     }
   )}
