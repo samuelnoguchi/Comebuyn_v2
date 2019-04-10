@@ -1,0 +1,11 @@
+.card-body{
+    position: relative;
+    height: 30vh;
+}
+
+.card-body-content {
+    position: absolute;
+    bottom: 16px;
+    
+   
+}
