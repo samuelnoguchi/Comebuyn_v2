@@ -14,18 +14,18 @@ import { NavbarComponent } from './navbar/navbar.component';
 import { HomeComponent } from './home/home.component';
 import { LoginComponent } from './login/login.component';
 import { RouterModule } from '@angular/router';
-import { AuthService } from './auth.service';
-import { AuthGuard } from './auth-guard.service';
+import { AuthService } from 'shared/services/auth.service';
+import { AuthGuard } from 'shared/services/auth-guard.service';
 import { MyOrdersComponent } from './my-orders/my-orders.component';
 import { OrderSuccessComponent } from './order-success/order-success.component';
 import { AdminProductsComponent } from './admin/admin-products/admin-products.component';
-import { UserService } from './user.service';
+import { UserService } from 'shared/services/user.service';
 import { AdminAuthGuard } from './admin-auth-guard.service';
 import { ProductFormComponent } from './admin/product-form/product-form.component';
-import { CategoryService } from './category.service';
-import { ProductService } from './product.service';
+import { CategoryService } from 'shared/services/category.service';
+import { ProductService } from 'shared/services/product.service';
 import { ProductsComponent } from './products/products.component';
-import { ProductCardComponent } from './product-card/product-card.component';
+import { ProductCardComponent } from 'shared/components/product-card/product-card.component';
 import { ProductFilterComponent } from './products/product-filter/product-filter.component';
 
 @NgModule({
