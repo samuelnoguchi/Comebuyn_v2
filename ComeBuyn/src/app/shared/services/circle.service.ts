@@ -10,7 +10,7 @@ import { Product } from 'shared/models/product';
 })
 export class CircleService {
 
-  constructor(private productService:ProductService) { 
+  constructor(private productService:ProductService, private userService:UserService) { 
 
   }
 
@@ -22,6 +22,9 @@ export class CircleService {
     let buyer =  "buyer";
     let productId = product.$key;
 
+    // Add circle to user
+    this.addCircleToUser(userId, productId, quantity);
+
   
     // Add user to circle for the quantity specified
     for (let i=0; i<quantity; i++){
@@ -31,7 +34,7 @@ export class CircleService {
       // Update the product
       product = this.addUserToCircle(buyerId, userId, product, shippingInfo);
       // Update in database
-      this.productService.update(productId, product);
+      //this.productService.update(productId, product);
       numBuyer++;
     }
   }
@@ -49,7 +52,23 @@ export class CircleService {
 
     // Increment the number of buyers
     product.numBuyers++;
-    
     return product
+  }
+
+  addCircleToUser(userId:string, productId:string, quantity:number){
+    this.userService.get(userId).valueChanges().take(1).subscribe(user=>{
+
+      //Add product Id to user 
+      if(user.myCircles){
+        user.myCircles[productId] = quantity;
+      }
+      else{
+        user.myCircles = {};
+        user.myCircles[productId] = quantity;
+      }
+
+      // Update user info
+      this.userService.update(userId, user);
+    });
   }
 }

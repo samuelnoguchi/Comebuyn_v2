@@ -3,6 +3,7 @@ import { AuthService } from 'shared/services/auth.service';
 import { ProductService } from 'shared/services/product.service';
 import { CircleService } from 'shared/services/circle.service';
 import { Product } from 'shared/models/product';
+import { take } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -14,7 +15,7 @@ export class OrderService {
   order(product:Product, quantity:number, shippingInfo){
     
     // Get the uid of the current user
-    this.auth.getUserKey().subscribe(uid=>{
+    this.auth.getUserKey().take(1).subscribe(uid=>{
 
     
       // Join the circle multiple times depending on quantity
