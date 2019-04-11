@@ -11,6 +11,7 @@ export class ProductService {
 
   constructor(private db: AngularFireDatabase) { }
 
+//-------------------- CREATE Functions ----------------------//
   
   create(product){
     // Add field for number of buyers
@@ -18,21 +19,24 @@ export class ProductService {
     return this.db.list('/products').push(product);
   }
 
-  update(productId, product) {
-    return this.db.object('/products/' + productId).update(product);
-  }
+//-------------------- READ Functions ----------------------//
 
-  delete(productId){
-    return this.db.object('/products/' + productId).remove();
-  }
 
-//  data is returned as an observable with object structure:  
-//  $key: string
-//  category: string
-//  imageUrl: string
-//  numBuyersRequired: number
-//  price: number
-//  title: string
+  /*  getAll() 
+
+      Get all producdts in db
+
+      Input: none
+    
+      Output: list of all products in db, with form:
+        $key: string
+        category: string
+        imageUrl: string
+        numBuyers: number
+        numBuyersRequired: number
+        price: number
+        title: string
+  */
 
   getAll() {
     let afList = this.db.list('/products');
@@ -51,13 +55,23 @@ export class ProductService {
     }));
   }
 
-//  data is returned as an observable with object structure:  
-//  $key: string
-//  category: string
-//  imageUrl: string
-//  numBuyersRequired: number
-//  price: number
-//  title: string
+/*  getAllByCategory() 
+
+  Get all products in db with correct category
+
+  Input: category:string
+ 
+  Output: (list of all products in db with category matching input, with form)
+    data {
+      $key: string
+      category: string
+      imageUrl: string
+      numBuyers: number
+      numBuyersRequired: number
+      price: number
+      title: string
+    }  
+*/
 
   getAllByCategory(category:string) {
     let afList = this.db.list('/products', ref=> ref.orderByChild('category').equalTo(category));
@@ -73,10 +87,50 @@ export class ProductService {
     }));
   }
 
+/*  get() 
+
+  Get single product in db, by productID
+
+  Input: 
+    productId: string
+ 
+  Output: (list of all products in db with category matching input, with form)
+    {}: Product
+*/
 
   get(productId):AngularFireObject<Product>{
     return this.db.object('/products/' + productId);
   }
 
+  getKey(productId){
+    return this.db.list('/products/' + productId).snapshotChanges().pipe(
+      map(action =>{
+        return action.map(
+          item =>{
+            const $key = item.payload.key;
+            return $key;
+          }
+        )
+      })
+    )  
+  }
+
+//-------------------- UPDATE Functions ----------------------//
+
+  update(productId, product) {
+
+     //If product has key in it, remove (db cant take key)
+    if(product.$key){
+      delete product.$key;
+    }
+   
+    return this.db.object('/products/' + productId).update(product);
+  }
+
+//-------------------- DELETE Functions ----------------------//
+
+  delete(productId){
+    return this.db.object('/products/' + productId).remove();
+  }
 
 }

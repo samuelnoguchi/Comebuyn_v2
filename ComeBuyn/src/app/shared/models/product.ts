@@ -4,6 +4,7 @@ export interface Product {
     imageUrl: string
     numBuyers: number
     numBuyersRequired: number
+    buyers: {}
     price: number
     title: string
 }

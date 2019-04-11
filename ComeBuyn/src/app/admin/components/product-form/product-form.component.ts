@@ -19,6 +19,7 @@ export class ProductFormComponent implements OnInit {
     category:null,
     numBuyers:null,
     numBuyersRequired:null,
+    buyers: {},
     price:null,
     imageUrl:null,
     title:null
