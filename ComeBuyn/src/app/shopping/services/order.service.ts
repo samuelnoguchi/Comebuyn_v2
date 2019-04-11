@@ -22,7 +22,6 @@ export class OrderService {
       
         this.circleService.joinCircle(uid, product, quantity, shippingInfo);
       
-      // Do other things
     });
   }
 

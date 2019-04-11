@@ -34,7 +34,7 @@ export class CircleService {
       // Update the product
       product = this.addUserToCircle(buyerId, userId, product, shippingInfo);
       // Update in database
-      //this.productService.update(productId, product);
+      this.productService.update(productId, product);
       numBuyer++;
     }
   }
@@ -60,8 +60,18 @@ export class CircleService {
 
       //Add product Id to user 
       if(user.myCircles){
-        user.myCircles[productId] = quantity;
+        
+        // If the user has already entered this circle
+        if(user.myCircles.hasOwnProperty(productId)){
+          let numAlreadyBought: number = user.myCircles[productId];
+          let numBought: number = +numAlreadyBought + +quantity;
+          user.myCircles[productId] = numBought;
+        }
+        else{
+          user.myCircles[productId] = quantity;
+        }
       }
+      // If no circles are entered yet, initialize the object first
       else{
         user.myCircles = {};
         user.myCircles[productId] = quantity;

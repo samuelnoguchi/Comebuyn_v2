@@ -1,6 +1,6 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ProductService } from 'shared/services/product.service';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { Product } from 'shared/models/product';
 import { CircleService } from 'shared/services/circle.service';
@@ -43,6 +43,7 @@ export class CheckOutComponent implements OnDestroy {
     private productService: ProductService, 
     private orderService: OrderService, 
     private route: ActivatedRoute,
+    private router: Router
     ) {
     
     // Subscribe to get the route parameters 
@@ -72,6 +73,7 @@ export class CheckOutComponent implements OnDestroy {
   order(shippingInfo) {
     this.orderService.order(this.product, this.quantity, shippingInfo);
     
+    this.router.navigate(['/order-success'])
   }
 
   ngOnDestroy(): void {
