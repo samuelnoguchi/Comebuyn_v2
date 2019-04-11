@@ -26,7 +26,6 @@ export class AuthService {
   login(){
     // If a return url is present save it in variable
     let returnUrl = this.route.snapshot.queryParamMap.get('returnUrl') || '/';
-    
     // login, navigating to the return url afterwards if necissary
     this.afAuth.auth.signInWithPopup(new firebase.auth.GoogleAuthProvider())
       .then(finished => {
@@ -34,6 +33,7 @@ export class AuthService {
           if(user){
             this.userService.save(user);
             this.router.navigate([returnUrl]);
+            console.log(returnUrl)
           }
         });
       });

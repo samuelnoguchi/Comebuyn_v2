@@ -23,12 +23,19 @@ import { CheckOutComponent } from './components/check-out/check-out.component';
     SharedModule,
     RouterModule.forChild([
       { path: 'product-page', component: ProductPageComponent },
+      { path: 'product-page/:productId', component: ProductPageComponent },
+
       { path: 'check-out', component: CheckOutComponent, canActivate: [AuthGuard] },
+      { path: 'check-out/:productId/:quantity', component: CheckOutComponent, canActivate: [AuthGuard] },
+      
       { path: 'order-success', component: OrderSuccessComponent, canActivate: [AuthGuard] },
       { path: 'my-orders', component: MyOrdersComponent, canActivate: [AuthGuard] },
     
       { path: 'products', component: ProductsComponent },
       { path: 'products/:category', component: ProductsComponent },
+
+
+      
     ])
   ]
 })
