@@ -1,11 +1,8 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnDestroy } from '@angular/core';
 import { ProductService } from 'shared/services/product.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { Product } from 'shared/models/product';
-import { CircleService } from 'shared/services/circle.service';
-import { AuthService } from 'shared/services/auth.service';
-import { AppUser } from 'shared/models/app-user';
 import { OrderService } from 'app/shopping/services/order.service';
 
 @Component({
@@ -72,7 +69,6 @@ export class CheckOutComponent implements OnDestroy {
   // Place order
   order(shippingInfo) {
     this.orderService.order(this.product, this.quantity, shippingInfo);
-    
     this.router.navigate(['/order-success'])
   }
 

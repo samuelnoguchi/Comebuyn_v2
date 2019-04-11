@@ -14,6 +14,7 @@ export class MyOrdersComponent implements OnInit {
 
   appUser:AppUser;
   circles:string[];
+  quantities:number[];
   products:Product[] =[];
   products$:[Observable<Product>];
 
@@ -22,6 +23,7 @@ export class MyOrdersComponent implements OnInit {
       this.appUser = appUser;
       if(this.appUser.myCircles){
         this.circles = Object.keys(this.appUser.myCircles);
+        this.quantities = Object.values(this.appUser.myCircles);
         this.products$ = this.productService.getAllByIds(this.circles);
         this.getProducts();
       }

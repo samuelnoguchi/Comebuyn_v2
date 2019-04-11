@@ -5,13 +5,15 @@
           <thead>
               <tr>
                   <th>Title</th>
+                  <th>Quantity</th>
                   <th>Status</th>
                   <th></th>
               </tr>
           </thead>
           <tbody>
-              <tr *ngFor="let p of products">
+              <tr *ngFor="let p of products; index as i">
                   <td>{{ p.title }}</td>
+                  <td>{{ quantities[i] }}</td>
                   <td>{{ p.numBuyers }} / {{ p.numBuyersRequired }} </td>
                   <td>
                       <a [routerLink]="['/product-page']" [queryParams]="{ productId: p.$key }">View Product</a>
