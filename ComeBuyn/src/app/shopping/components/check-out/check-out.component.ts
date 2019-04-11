@@ -11,7 +11,7 @@ import { Product } from 'shared/models/product';
 })
 export class CheckOutComponent implements OnDestroy {
 
-  product:Product={
+  product:Product= {
     $key:null,
     category:null,
     numBuyers:null,
@@ -23,9 +23,10 @@ export class CheckOutComponent implements OnDestroy {
   quantity:number;
   productId:string;
   paramSub: Subscription;
+
   price:number;
   tax:number;
-  total;
+  total:number;
 
   constructor(private productService: ProductService, private route: ActivatedRoute) {
     this.paramSub = route.queryParams.subscribe(params => {
@@ -39,13 +40,14 @@ export class CheckOutComponent implements OnDestroy {
     })
   }
 
-  calculatePrice():number {
-     return this.product.price * this.quantity;
+  calculatePrice() {
+    this.price =  this.product.price * this.quantity;
+    this.tax = this.price * 0.13;
+    this.total = this.price + this.tax;
   }
 
-
   joinCircle(){
-
+    console.log("hi");
   }
 
   ngOnDestroy(): void {
