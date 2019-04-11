@@ -1,3 +1,28 @@
-<p>
-  my-orders works!
-</p>
+<div class ="orders-active">
+  <h2>Active Circles</h2>
+  <div *ngIf = "products ; none_active">
+      <table class="table">
+          <thead>
+              <tr>
+                  <th>Title</th>
+                  <th>Status</th>
+                  <th></th>
+              </tr>
+          </thead>
+          <tbody>
+              <tr *ngFor="let p of products">
+                  <td>{{ p.title }}</td>
+                  <td>{{ p.numBuyers }} / {{ p.numBuyersRequired }} </td>
+                  <td>
+                      <a [routerLink]="['/product-page']" [queryParams]="{ productId: p.$key }">View Product</a>
+                  </td>
+              </tr>
+          </tbody>
+      </table>
+    </div>
+    
+    <ng-template #none_active>
+      No active circles
+    </ng-template>
+
+</div>

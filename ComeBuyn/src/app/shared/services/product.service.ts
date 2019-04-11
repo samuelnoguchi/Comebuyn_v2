@@ -1,7 +1,8 @@
 import { Injectable } from '@angular/core';
 import { AngularFireDatabase, AngularFireObject } from '@angular/fire/database';
-import { map } from 'rxjs/operators';
+import { map, switchMap } from 'rxjs/operators';
 import { Product } from 'shared/models/product';
+import { Observable } from 'rxjs';
 
 
 @Injectable({
@@ -87,6 +88,22 @@ export class ProductService {
     }));
   }
 
+  getAllByIds(ids:string[]):[Observable<Product>] {
+    let products:[Observable<Product>] = [Observable.of(null)];
+
+    for (let id of ids){
+      products.push(this.get(id).valueChanges());
+    }
+
+    // Remove first null element if more elements exist
+    if(products.length > 1){
+      products.splice(0, 1);
+    }
+    
+    return products;
+  }
+
+
 /*  get() 
 
   Get single product in db, by productID
@@ -94,26 +111,16 @@ export class ProductService {
   Input: 
     productId: string
  
-  Output: (list of all products in db with category matching input, with form)
-    {}: Product
+  Output: 
+    AngularFireObject<Product>
 */
 
   get(productId):AngularFireObject<Product>{
     return this.db.object('/products/' + productId);
   }
 
-  getKey(productId){
-    return this.db.list('/products/' + productId).snapshotChanges().pipe(
-      map(action =>{
-        return action.map(
-          item =>{
-            const $key = item.payload.key;
-            return $key;
-          }
-        )
-      })
-    )  
-  }
+
+
 
 //-------------------- UPDATE Functions ----------------------//
 

@@ -17,7 +17,6 @@ export class CircleService {
   // Add a user to a circle
   joinCircle(userId:string, product:Product, quantity:number, shippingInfo:{}){
     
-
     let numBuyer = product.numBuyers + 1;
     let buyer =  "buyer";
     let productId = product.$key;

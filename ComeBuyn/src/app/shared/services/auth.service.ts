@@ -7,7 +7,6 @@ import { UserService } from 'shared/services/user.service';
 import { AppUser } from 'shared/models/app-user';
 import { switchMap, map } from 'rxjs/operators';
 import 'rxjs/add/observable/of';
-import { userInfo } from 'os';
 
 @Injectable({
   providedIn: 'root'
@@ -39,6 +38,7 @@ export class AuthService {
         });
       });
   }
+  
   logout(){
     this.afAuth.auth.signOut();
   }
