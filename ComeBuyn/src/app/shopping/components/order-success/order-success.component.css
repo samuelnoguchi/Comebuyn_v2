@@ -1,0 +1,10 @@
+.buttons{
+    padding-top: 5%;
+    padding-bottom: 5%;
+}
+
+.btn {
+    padding-right: 32px;
+    padding-left: 32px;
+    margin-right: 8px;
+}

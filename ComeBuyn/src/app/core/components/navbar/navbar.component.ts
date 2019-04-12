@@ -10,6 +10,7 @@ import { AppUser } from 'shared/models/app-user';
 export class NavbarComponent
 {
   appUser: AppUser;
+  navbarOpen = false;
 
   constructor(private auth: AuthService) { 
     auth.appUser$.subscribe(appUser => {
@@ -17,10 +18,14 @@ export class NavbarComponent
     });
   }
 
+  toggleNavbar() {
+    this.navbarOpen = !this.navbarOpen;
+    console.log(this.navbarOpen)
+  }
+
   login(){
     this.auth.login();
   }
-
 
   logout(){
     this.auth.logout();

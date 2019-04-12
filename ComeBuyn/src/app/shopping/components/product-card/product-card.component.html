@@ -1,0 +1,24 @@
+<div class="card mb-4 shadow-sm">
+  <div class="img-container">
+      <img class="card-img-top img-responsive" [src]="product.imageUrl" alt="Card image cap">
+  </div>
+  <div class="card-body">
+    <div class="card-body-content">
+        <h5 class="card-title">{{ product.title }}</h5>
+        <div class="card-text">
+          <div class="card-price">
+              {{ product.price | currency:'USD':true }} 
+          </div>
+          <div class="card-num-buyers">
+              {{ product.numBuyers }} / {{ product.numBuyersRequired }} 
+          </div>
+        </div>
+        <a 
+          routerLink="/product-page"
+          [queryParams]="{ productId: product.$key }"
+          class="btn btn-primary">
+            View Product
+        </a>
+    </div>   
+  </div>
+</div>

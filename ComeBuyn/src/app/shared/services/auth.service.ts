@@ -5,7 +5,7 @@ import { Observable } from 'rxjs';
 import { ActivatedRoute, Router } from '@angular/router';
 import { UserService } from 'shared/services/user.service';
 import { AppUser } from 'shared/models/app-user';
-import { switchMap } from 'rxjs/operators';
+import { switchMap, map } from 'rxjs/operators';
 import 'rxjs/add/observable/of';
 
 @Injectable({
@@ -33,11 +33,12 @@ export class AuthService {
         this.user$.subscribe(user=>{
           if(user){
             this.userService.save(user);
-            this.router.navigate([returnUrl]);
+            this.router.navigateByUrl(returnUrl);
           }
         });
       });
   }
+  
   logout(){
     this.afAuth.auth.signOut();
   }
@@ -49,5 +50,14 @@ export class AuthService {
         return Observable.of(null); // otherwise return observable with value null
       })
     )
+  }
+
+  // Get the user uid
+  getUserKey(){
+    return this.user$.pipe(
+      map(user => {
+        return user.uid
+      })
+    );
   }
 }
