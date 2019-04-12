@@ -24,13 +24,12 @@ export class OrderService {
     return this.db.list('/orders').push(order);
   }
 
-  // TODO implement this
-  addOrderToUser(userId, orderId){
-    console.log("add order " + orderId + " to user " + userId);
-
+  // add order to a users myOrders object
+  addOrderToUser(userId, orderId):Promise<void>{
+    
+    let promise: Promise<void>
+    
     this.userService.get(userId).valueChanges().take(1).subscribe(user=>{
-
-      console.log(user);
 
       // If user already has field
       if(user.myOrders){
@@ -41,13 +40,14 @@ export class OrderService {
       }
       // Otherwise must initialize first
       else{
-        console.log("make")
         user.myOrders = {};
         user.myOrders[orderId] = false;
       }
 
-      this.userService.update(userId, user);
+      promise = this.userService.update(userId, user);
 
     });
+
+    return promise;
   }
 }

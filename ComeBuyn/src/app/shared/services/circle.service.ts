@@ -6,6 +6,9 @@ import { AppUser } from 'shared/models/app-user';
 import { Product } from 'shared/models/product';
 import { OrderService } from './order.service';
 import { NgbPaginationNumber } from '@ng-bootstrap/ng-bootstrap';
+import { IfStmt } from '@angular/compiler';
+import { $, promise } from 'protractor';
+import { reject } from 'q';
 
 @Injectable({
   providedIn: 'root'
@@ -19,36 +22,60 @@ export class CircleService {
 
   }
 
-  // Add a user to a circle
+  /*--------------------------------------------------------------------------------
+  joinCircle: The public method that joins a user to a circle
+
+  First: Add the user to the circle, quantity number of times
+  Second: If the user had filled the circle call completeCircle()
+
+  Input: userId:string, product:Product, quanitiy:number, shippingInfo:{}
+  Output: void
+  ---------------------------------------------------------------------------------*/
+
   public joinCircle(userId:string, product:Product, quantity:number, shippingInfo:{}){
     
-    let numBuyer = product.numBuyers + 1;
+    let numBuyer = product.numBuyers;
     let buyer =  "buyer";
     let productId = product.$key;
 
     // Add circle to user
     this.addCircleToUser(userId, productId, quantity);
 
-  
-    // Add user to circle for the quantity specified
+    let updating:Promise<void>;
+    let totalInCirle = +product.numBuyers + +quantity;
+
     for (let i=0; i<quantity; i++){
+      numBuyer++;
       // Generate buyer Id
       let buyerId = buyer + numBuyer;
-
       // Update the product
       product = this.addUserToCircle(buyerId, userId, product, shippingInfo);
-      // Update in database
-      this.productService.update(productId, product);
+      //Update in database
+      updating = this.productService.update(productId, product);
+    }
 
-      // If order fills a circle
-      if(numBuyer == product.numBuyersRequired){
+    // If order fills a circle  
+    if(totalInCirle === product.numBuyersRequired){
+      //Wait for update to finish
+      updating.then(done=>{ 
         this.completeCircle(productId, product);
-      }
-      numBuyer++;
+      });
     }
   }
 
-  // Create an order from a filled circle, and reset the circle
+  /*--------------------------------------------------------------------------------
+  completeCircle: called when a user completes a circle
+
+  First: Generate a new order based on the circle
+  Second: Get ids of all user in circle
+  Third: Remove the circle from the user
+  Fourth: Add the order to the user 
+  Fifth: Reset the circle
+
+  Input: productId:string, product:Product
+  Output: void
+  ---------------------------------------------------------------------------------*/
+
   private completeCircle(productId:string, product:Product ){
 
     //Make new order
@@ -56,34 +83,62 @@ export class CircleService {
     let orderId = this.orderService.create(order).key;
 
     // Remove circle from all users, add order
+
+    let usersInCircle = new Set()
+
+    // Generate unique list of users in circle
     for (let userId of Object.values(product.buyers)){
-      this.removeCircleFromUser(userId, productId);
-      this.orderService.addOrderToUser(userId, orderId);
+      usersInCircle.add(userId);
     }
 
-   
+    // Iterate over users in circle, removing the circle from the user and adding the order
+    usersInCircle.forEach(userId=>{
+      this.removeCircleFromUser(userId, productId).then(finished=>{
+        this.orderService.addOrderToUser(userId, orderId);
+      });
+    });
+
     // Reset product
     this.resetCircle(productId,product);
-    
   }
 
-  // Reset a product to 0 buyers
+  /*--------------------------------------------------------------------------------
+  resetCircle: called when a user completes a circle
+
+  First: Reset the buyers list to empty object
+  Second: Reset the numBuyers to 0
+
+  Input: productId:string, product:Product
+  Output: void
+  ---------------------------------------------------------------------------------*/
+
   private resetCircle(productId:string, product:Product){
     product.buyers = {}
     product.numBuyers = 0;
     this.productService.update(productId, product);
   }
 
-  // Remove a circle from a users list of active circles
-  private removeCircleFromUser(userId, productId:string){
+  /*--------------------------------------------------------------------------------
+    removeCircleFromUser: called to remove a circle from a users myCircles object
+
+    First: Get the user information 
+    Second: Update the info, returning a promise for synchronization
+  
+    Input: userId:string, productId:string
+    Output: Promise<void>
+    ---------------------------------------------------------------------------------*/
+
+  private removeCircleFromUser(userId, productId:string):Promise<void>{
+    let promise:Promise<void>;
+    
     this.userService.get(userId).valueChanges().take(1).subscribe(user=>{
-      // If the product exists in the users circle, remove it 
-      if(user.myCircles[productId]){
-        delete user.myCircles[productId];
-        this.userService.update(userId, user);
-       } 
+     
+    // Delete the circle, and return a promise  
+    delete user.myCircles[productId];
+    promise = this.userService.update(userId, user);
     });
 
+    return promise;
   }
 
   // Add user to products list of buyers

@@ -41,7 +41,7 @@ export class ProductPageComponent {
         product=> {
           this.product = product;
           this.image = this.product.imageUrl;
-          this.numAvailable = Array(this.product.numBuyersRequired).fill(0).map((x,i)=>i+1);
+          this.numAvailable = Array(this.product.numBuyersRequired-this.product.numBuyers).fill(0).map((x,i)=>i+1);
        
         }
       );

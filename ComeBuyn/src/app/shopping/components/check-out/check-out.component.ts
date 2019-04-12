@@ -53,7 +53,6 @@ export class CheckOutComponent implements OnDestroy {
     this.productSub = productService.get(this.productId).valueChanges().subscribe(product => {
       this.product = product;
       this.product.$key = this.productId;
-      console.log(product)
       this.calculatePrice();
     });
 
