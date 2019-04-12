@@ -50,13 +50,18 @@ export class CircleService {
 
   // Create an order from a filled circle, and reset the circle
   private completeCircle(productId:string, product:Product ){
-    // Remove circle from all users
-    for (let userId of Object.values(product.buyers)){
-      this.removeCircleFromUser(userId, productId)
-    }
+
     //Make new order
     let order = this.orderService.createFromProduct(product, productId);
-    this.orderService.create(order);
+    let orderId = this.orderService.create(order).key;
+
+    // Remove circle from all users, add order
+    for (let userId of Object.values(product.buyers)){
+      this.removeCircleFromUser(userId, productId);
+      this.addOrderToUser(userId, orderId);
+    }
+
+   
     // Reset product
     this.resetCircle(productId,product);
     
@@ -125,4 +130,20 @@ export class CircleService {
       this.userService.update(userId, user);
     });
   }
+
+  // TODO implement this
+  addOrderToUser(userId, orderId){
+
+    this.userService.get(userId).valueChanges().take(1).subscribe(user=>{
+
+      //if(user.myOrders)
+
+
+    })
+
+
+  }
+
+
+
 }
