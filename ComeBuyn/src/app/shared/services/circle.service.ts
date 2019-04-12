@@ -1,14 +1,11 @@
 import { Injectable } from '@angular/core';
 import { ProductService } from './product.service';
 import { UserService } from './user.service';
-import { AuthService } from './auth.service';
-import { AppUser } from 'shared/models/app-user';
 import { Product } from 'shared/models/product';
 import { OrderService } from './order.service';
-import { NgbPaginationNumber } from '@ng-bootstrap/ng-bootstrap';
-import { IfStmt } from '@angular/compiler';
-import { $, promise } from 'protractor';
-import { reject } from 'q';
+import { AppUser } from 'shared/models/app-user';
+import { User } from 'firebase';
+
 
 @Injectable({
   providedIn: 'root'
@@ -19,7 +16,6 @@ export class CircleService {
     private productService:ProductService, 
     private userService:UserService, 
     private orderService: OrderService) { 
-
   }
 
   /*--------------------------------------------------------------------------------
@@ -58,6 +54,7 @@ export class CircleService {
     if(totalInCirle === product.numBuyersRequired){
       //Wait for update to finish
       updating.then(done=>{ 
+        console.log("circle has been filled");
         this.completeCircle(productId, product);
       });
     }
@@ -93,9 +90,14 @@ export class CircleService {
 
     // Iterate over users in circle, removing the circle from the user and adding the order
     usersInCircle.forEach(userId=>{
-      this.removeCircleFromUser(userId, productId).then(finished=>{
-        this.orderService.addOrderToUser(userId, orderId);
+      this.userService.get(userId).valueChanges().take(1).subscribe(appUser=>{
+        appUser = this.removeCircleFromUser(appUser, productId);
+        appUser = this.orderService.addOrderToUser(appUser, orderId);
+
+        console.log(appUser);
+        this.userService.update(userId, appUser);
       });
+
     });
 
     // Reset product
@@ -119,29 +121,32 @@ export class CircleService {
   }
 
   /*--------------------------------------------------------------------------------
-    removeCircleFromUser: called to remove a circle from a users myCircles object
+  removeCircleFromUser: called to remove a circle from a users myCircles object
 
-    First: Get the user information 
-    Second: Update the info, returning a promise for synchronization
-  
-    Input: userId:string, productId:string
-    Output: Promise<void>
-    ---------------------------------------------------------------------------------*/
+  First: delete productId from users circles if it exists
 
-  private removeCircleFromUser(userId, productId:string):Promise<void>{
-    let promise:Promise<void>;
-    
-    this.userService.get(userId).valueChanges().take(1).subscribe(user=>{
-     
-    // Delete the circle, and return a promise  
-    delete user.myCircles[productId];
-    promise = this.userService.update(userId, user);
-    });
+  Input: userId:string, productId:string
+  Output: AppUser
+  ---------------------------------------------------------------------------------*/
 
-    return promise;
+  private removeCircleFromUser(appUser:AppUser, productId:string):AppUser{
+    // Delete the circle
+    if(appUser.myCircles[productId]) 
+      delete appUser.myCircles[productId];
+ 
+    return appUser;
   }
 
-  // Add user to products list of buyers
+  /*--------------------------------------------------------------------------------
+  addUserToCircle: called to add a user to a circle
+  
+  First: Set the buyers object to contain the circle
+  Second: Increment the numBuyers
+
+  Input: buyerNumber:string, userId:string, product:Product, shippingInfo:{}
+  Output: Product
+  ---------------------------------------------------------------------------------*/
+
   private addUserToCircle(buyerNumber:string, userId:string, product:Product, shippingInfo:{}): Product{
     // Add user id to product buyers list
     if(product.buyers){
@@ -158,7 +163,18 @@ export class CircleService {
     return product
   }
 
-  // Add the circle to the users list of active circles
+  /*--------------------------------------------------------------------------------
+  addCircleToUser: called to add a circle to a user
+  
+  First: Get the user information
+  Second: If user has already entered the circle, increment the existing circle entry
+  Third: Otherwise add the circle
+  Fourth: Update user info in db
+
+  Input: userId:string, productId:string, quantity:number
+  Output: void
+  ---------------------------------------------------------------------------------*/
+
   private addCircleToUser(userId:string, productId:string, quantity:number){
     this.userService.get(userId).valueChanges().take(1).subscribe(user=>{
 
@@ -185,9 +201,4 @@ export class CircleService {
       this.userService.update(userId, user);
     });
   }
-
-
-
-
-
 }

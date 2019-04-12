@@ -34,7 +34,6 @@ export class AuthService {
           if(user){
             this.userService.save(user);
             this.router.navigateByUrl(returnUrl);
-            console.log(returnUrl)
           }
         });
       });

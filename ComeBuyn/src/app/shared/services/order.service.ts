@@ -3,6 +3,8 @@ import { AngularFireDatabase } from '@angular/fire/database';
 import { Product } from 'shared/models/product';
 import { Order } from 'shared/models/order';
 import { UserService } from './user.service';
+import { User } from 'firebase';
+import { AppUser } from 'shared/models/app-user';
 
 @Injectable({
   providedIn: 'root'
@@ -25,29 +27,20 @@ export class OrderService {
   }
 
   // add order to a users myOrders object
-  addOrderToUser(userId, orderId):Promise<void>{
-    
-    let promise: Promise<void>
-    
-    this.userService.get(userId).valueChanges().take(1).subscribe(user=>{
 
-      // If user already has field
-      if(user.myOrders){
-        // If the order has not already been added to the user
-        if(!user.myOrders.hasOwnProperty(orderId)){
-          user.myOrders[orderId] = false;
-        }
+  addOrderToUser(appUser, orderId):AppUser{
+    // If user already has field
+    if(appUser.myOrders){
+      // If the order has not already been added to the appUser
+      if(!appUser.myOrders.hasOwnProperty(orderId)){
+        appUser.myOrders[orderId] = false;
       }
-      // Otherwise must initialize first
-      else{
-        user.myOrders = {};
-        user.myOrders[orderId] = false;
-      }
-
-      promise = this.userService.update(userId, user);
-
-    });
-
-    return promise;
+    }
+    // Otherwise must initialize first
+    else{
+      appUser.myOrders = {};
+      appUser.myOrders[orderId] = false;
+    }
+    return appUser;
   }
 }

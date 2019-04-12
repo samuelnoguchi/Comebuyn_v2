@@ -121,7 +121,6 @@ export class ProductService {
 
 
 
-
 //-------------------- UPDATE Functions ----------------------//
 
   update(productId, product) {

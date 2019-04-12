@@ -24,4 +24,7 @@ export class UserService {
   update(uid: string, appUser:AppUser){
     return this.db.object('/users/' + uid).update(appUser);
   }
+
+
+
 }
