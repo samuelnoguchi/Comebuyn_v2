@@ -20,7 +20,7 @@ export class CircleService {
   }
 
   // Add a user to a circle
-  joinCircle(userId:string, product:Product, quantity:number, shippingInfo:{}){
+  public joinCircle(userId:string, product:Product, quantity:number, shippingInfo:{}){
     
     let numBuyer = product.numBuyers + 1;
     let buyer =  "buyer";
@@ -58,7 +58,7 @@ export class CircleService {
     // Remove circle from all users, add order
     for (let userId of Object.values(product.buyers)){
       this.removeCircleFromUser(userId, productId);
-      this.addOrderToUser(userId, orderId);
+      this.orderService.addOrderToUser(userId, orderId);
     }
 
    
@@ -94,7 +94,7 @@ export class CircleService {
     }
     // Need to initalize buyers field if no current buyers
     else{
-      product.buyers  = {};
+      product.buyers = {};
       product.buyers[buyerNumber] = userId;
     }
 
@@ -113,7 +113,7 @@ export class CircleService {
         // If the user has already entered this circle
         if(user.myCircles.hasOwnProperty(productId)){
           let numAlreadyBought: number = user.myCircles[productId];
-          let numBought: number = +numAlreadyBought + +quantity;
+          let numBought: number = +numAlreadyBought + +quantity; 
           user.myCircles[productId] = numBought;
         }
         else{
@@ -131,18 +131,7 @@ export class CircleService {
     });
   }
 
-  // TODO implement this
-  addOrderToUser(userId, orderId){
 
-    this.userService.get(userId).valueChanges().take(1).subscribe(user=>{
-
-      //if(user.myOrders)
-
-
-    })
-
-
-  }
 
 
 
