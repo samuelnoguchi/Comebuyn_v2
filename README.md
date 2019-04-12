@@ -39,5 +39,21 @@ Deploy
 firebase deploy
 ```
 
+# Development TODO
+## Basic Functionallity
+1. My orders - completed circles
+2. Manage orders (admin)
+3. Search bar
+4. Popular products
+5. Leave circle?
+
+## Styling
+1. Everything
+
+
+
+
+
+
 
 
