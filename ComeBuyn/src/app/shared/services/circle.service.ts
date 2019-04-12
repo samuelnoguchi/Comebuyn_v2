@@ -5,6 +5,7 @@ import { AuthService } from './auth.service';
 import { AppUser } from 'shared/models/app-user';
 import { Product } from 'shared/models/product';
 import { OrderService } from './order.service';
+import { NgbPaginationNumber } from '@ng-bootstrap/ng-bootstrap';
 
 @Injectable({
   providedIn: 'root'
@@ -47,31 +48,49 @@ export class CircleService {
     }
   }
 
-  completeCircle(productId:string, product:Product ){
-    
+  // Create an order from a filled circle, and reset the circle
+  private completeCircle(productId:string, product:Product ){
+    // Remove circle from all users
+    for (let userId of Object.values(product.buyers)){
+      this.removeCircleFromUser(userId, productId)
+    }
     //Make new order
-    this.orderService.createFromProduct(product, productId);
+    let order = this.orderService.createFromProduct(product, productId);
+    this.orderService.create(order);
     // Reset product
     this.resetCircle(productId,product);
-
+    
   }
 
-  resetCircle(productId:string, product:Product){
+  // Reset a product to 0 buyers
+  private resetCircle(productId:string, product:Product){
     product.buyers = {}
     product.numBuyers = 0;
     this.productService.update(productId, product);
   }
 
+  // Remove a circle from a users list of active circles
+  private removeCircleFromUser(userId, productId:string){
+    this.userService.get(userId).valueChanges().take(1).subscribe(user=>{
+      // If the product exists in the users circle, remove it 
+      if(user.myCircles[productId]){
+        delete user.myCircles[productId];
+        this.userService.update(userId, user);
+       } 
+    });
 
-  addUserToCircle(buyerId:string, userId:string, product:Product, shippingInfo:{}): Product{
+  }
+
+  // Add user to products list of buyers
+  private addUserToCircle(buyerNumber:string, userId:string, product:Product, shippingInfo:{}): Product{
     // Add user id to product buyers list
     if(product.buyers){
-      product.buyers[buyerId] = userId;
+      product.buyers[buyerNumber] = userId;
     }
     // Need to initalize buyers field if no current buyers
     else{
       product.buyers  = {};
-      product.buyers[buyerId] = userId;
+      product.buyers[buyerNumber] = userId;
     }
 
     // Increment the number of buyers
@@ -79,7 +98,8 @@ export class CircleService {
     return product
   }
 
-  addCircleToUser(userId:string, productId:string, quantity:number){
+  // Add the circle to the users list of active circles
+  private addCircleToUser(userId:string, productId:string, quantity:number){
     this.userService.get(userId).valueChanges().take(1).subscribe(user=>{
 
       //Add product Id to user 

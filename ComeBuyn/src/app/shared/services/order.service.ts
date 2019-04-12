@@ -10,13 +10,13 @@ export class OrderService {
 
   constructor(private db: AngularFireDatabase) { }
 
-  createFromProduct(product:Product, productId:string){
+  createFromProduct(product:Product, productId:string): Order{
     // Generate product
     let order:Order = {
       productId: productId,
       product: product
     }
-    this.create(order);
+    return order;
   }
 
   create(order:Order){
