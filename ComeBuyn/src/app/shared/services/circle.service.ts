@@ -80,7 +80,6 @@ export class CircleService {
     let orderId = this.orderService.create(order).key;
 
     // Remove circle from all users, add order
-
     let usersInCircle = new Set()
 
     // Generate unique list of users in circle
@@ -93,8 +92,6 @@ export class CircleService {
       this.userService.get(userId).valueChanges().take(1).subscribe(appUser=>{
         appUser = this.removeCircleFromUser(appUser, productId);
         appUser = this.orderService.addOrderToUser(appUser, orderId);
-
-        console.log(appUser);
         this.userService.update(userId, appUser);
       });
 
