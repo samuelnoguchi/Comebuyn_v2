@@ -8,7 +8,7 @@ import { take } from 'rxjs/operators';
 @Injectable({
   providedIn: 'root'
 })
-export class OrderService {
+export class CheckOutService {
 
   constructor(private auth: AuthService, private circleService: CircleService) { }
 

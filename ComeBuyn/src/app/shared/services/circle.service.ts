@@ -4,13 +4,17 @@ import { UserService } from './user.service';
 import { AuthService } from './auth.service';
 import { AppUser } from 'shared/models/app-user';
 import { Product } from 'shared/models/product';
+import { OrderService } from './order.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class CircleService {
 
-  constructor(private productService:ProductService, private userService:UserService) { 
+  constructor(
+    private productService:ProductService, 
+    private userService:UserService, 
+    private orderService: OrderService) { 
 
   }
 
@@ -34,9 +38,30 @@ export class CircleService {
       product = this.addUserToCircle(buyerId, userId, product, shippingInfo);
       // Update in database
       this.productService.update(productId, product);
+
+      // If order fills a circle
+      if(numBuyer == product.numBuyersRequired){
+        this.completeCircle(productId, product);
+      }
       numBuyer++;
     }
   }
+
+  completeCircle(productId:string, product:Product ){
+    
+    //Make new order
+    this.orderService.createFromProduct(product, productId);
+    // Reset product
+    this.resetCircle(productId,product);
+
+  }
+
+  resetCircle(productId:string, product:Product){
+    product.buyers = {}
+    product.numBuyers = 0;
+    this.productService.update(productId, product);
+  }
+
 
   addUserToCircle(buyerId:string, userId:string, product:Product, shippingInfo:{}): Product{
     // Add user id to product buyers list

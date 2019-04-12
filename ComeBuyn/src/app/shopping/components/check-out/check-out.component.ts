@@ -3,7 +3,7 @@ import { ProductService } from 'shared/services/product.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { Product } from 'shared/models/product';
-import { OrderService } from 'app/shopping/services/order.service';
+import { CheckOutService } from 'app/shopping/services/check-out.service';
 
 @Component({
   selector: 'app-check-out',
@@ -38,7 +38,7 @@ export class CheckOutComponent implements OnDestroy {
 
   constructor(
     private productService: ProductService, 
-    private orderService: OrderService, 
+    private checkOutService: CheckOutService, 
     private route: ActivatedRoute,
     private router: Router
     ) {
@@ -68,7 +68,7 @@ export class CheckOutComponent implements OnDestroy {
 
   // Place order
   order(shippingInfo) {
-    this.orderService.order(this.product, this.quantity, shippingInfo);
+    this.checkOutService.order(this.product, this.quantity, shippingInfo);
     this.router.navigate(['/order-success'])
   }
 

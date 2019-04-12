@@ -15,9 +15,10 @@ import { UserService } from './services/user.service';
 import { RouterModule } from '@angular/router';
 import { ProductPageComponent } from 'app/shopping/components/product-page/product-page.component';
 
+
 @NgModule({
   declarations: [
-    ProductCardComponent
+    ProductCardComponent,
   ],
   imports: [
     CommonModule,
