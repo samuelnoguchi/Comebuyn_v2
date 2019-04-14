@@ -1,5 +1,5 @@
 <div class ="orders-active">
-  <div>
+  <div *ngIf="orderIds.length !=0; else noneActive">
     <h2>Completed Circles</h2>
     <table class="table">
         <thead>
