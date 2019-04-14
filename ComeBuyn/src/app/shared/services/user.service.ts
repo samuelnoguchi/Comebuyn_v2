@@ -25,6 +25,7 @@ export class UserService {
     return this.db.object('/users/' + uid).update(appUser);
   }
 
+  
 
 
 }

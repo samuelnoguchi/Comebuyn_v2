@@ -1,0 +1,30 @@
+<div class ="orders-active">
+  <div *ngIf = "activeCircles.length !=0; else noneActive">
+    <h2>Active Circles</h2>
+    <table class="table">
+        <thead>
+            <tr>
+              <th>Title</th>
+              <th>Quantity</th>
+              <th>Status</th>
+              <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let p of activeCircles; index as i">
+                <td>{{ p.title }}</td>
+                <td>{{ quantities[i] }}</td>
+                <td>{{ p.numBuyers }} / {{ p.numBuyersRequired }} </td>
+                <td>
+                    <a [routerLink]="['/product-page']" [queryParams]="{ productId: p.$key }">View Product</a>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+  </div>
+
+  <ng-template #noneActive>
+      No active circles
+  </ng-template>
+
+</div>
