@@ -6,6 +6,7 @@ import { UserService } from './user.service';
 import { User } from 'firebase';
 import { AppUser } from 'shared/models/app-user';
 import { Observable } from 'rxjs';
+import { map, switchMap } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -86,4 +87,24 @@ export class OrderService {
     }    
     return orders;
   }
+
+  getAll() {
+    let afList = this.db.list('/orders');
+    
+    return afList.snapshotChanges().pipe(
+      map(action => {
+      return action.map(
+        item => {
+          //console.log(item.payload.val())
+          const $key = item.payload.key;
+          const data = { $key, ...item.payload.val() };
+          
+          //console.log(data)
+          return data;
+      });
+    }));
+  }
+
+
+
 }
