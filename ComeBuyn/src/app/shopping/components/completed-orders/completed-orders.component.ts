@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AppUser } from 'shared/models/app-user';
 import { Product } from 'shared/models/product';
-import { Observable } from 'rxjs';
+import { Observable, Subscription } from 'rxjs';
 import { AuthService } from 'shared/services/auth.service';
 import { OrderService } from 'shared/services/order.service';
 import { Order } from 'shared/models/order';
@@ -13,6 +13,8 @@ import { map } from 'rxjs/operators';
   styleUrls: ['./completed-orders.component.css']
 })
 export class CompletedOrdersComponent {
+
+  quantitySub:Subscription;
 
   appUser:AppUser;
   status:string[];
@@ -41,7 +43,7 @@ export class CompletedOrdersComponent {
       this.orders$[pIndex].subscribe(o=>{
         // Set the key of the product
         o.product.$key = o.productId;
-        this.getQuantity(o.product).subscribe(quanitiy=>{
+        this.quantitySub = this.getQuantity(o.product).take(1).subscribe(quanitiy=>{
           this.quantities[pIndex] = quanitiy;
         })
         this.completedCircles.push(o.product);
@@ -51,7 +53,6 @@ export class CompletedOrdersComponent {
 
   getQuantity(product){
     let quantity = 0;
-    let userKey;
     
     return this.auth.getUserKey().pipe(
       map(key=>{
@@ -64,4 +65,5 @@ export class CompletedOrdersComponent {
       })
     );
   }
+
 }
