@@ -88,6 +88,17 @@ export class ProductService {
     }));
   }
 
+  /*  getAllByIds() 
+
+  Get all products with given
+
+  Input: 
+    ids: string[]
+ 
+  Output: 
+    [AngularFireObject<Product>]
+*/
+
   getAllByIds(ids:string[]):[Observable<Product>] {
     let products:[Observable<Product>] = [Observable.of(null)];
 

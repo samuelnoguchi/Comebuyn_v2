@@ -6,7 +6,7 @@ import { AuthService } from 'shared/services/auth.service';
 import { ProductService } from 'shared/services/product.service';
 
 @Component({
-  selector: 'app-active-circles',
+  selector: 'active-circles',
   templateUrl: './active-circles.component.html',
   styleUrls: ['./active-circles.component.css']
 })
@@ -38,7 +38,6 @@ export class ActiveCirclesComponent {
     for (let pIndex = 0; pIndex < this.activeCircles$.length; pIndex++){      
       this.activeCircles$[pIndex].subscribe(p=>{
         p.$key = this.circles[pIndex]; // Set the product key
-        //this.activeCircles.push(p);
         this.updateProducts(p);
       });
     } 

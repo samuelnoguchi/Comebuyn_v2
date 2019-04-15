@@ -1,10 +1,11 @@
 import { Injectable } from '@angular/core';
-import { AngularFireDatabase } from '@angular/fire/database';
+import { AngularFireDatabase, AngularFireObject } from '@angular/fire/database';
 import { Product } from 'shared/models/product';
 import { Order } from 'shared/models/order';
 import { UserService } from './user.service';
 import { User } from 'firebase';
 import { AppUser } from 'shared/models/app-user';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -26,6 +27,7 @@ export class OrderService {
     return this.db.list('/orders').push(order);
   }
 
+  
   // add order to a users myOrders object
 
   addOrderToUser(appUser, orderId):AppUser{
@@ -44,4 +46,44 @@ export class OrderService {
     return appUser;
   }
 
+  /*  get() 
+
+    Get single product in db, by productID
+
+    Input: 
+      productId: string
+  
+    Output: 
+      AngularFireObject<Product>
+  */
+
+  get(orderId):AngularFireObject<Product>{
+    return this.db.object('/orders/' + orderId);
+  }
+
+
+  /*  getAllByIds() 
+
+    Get all products with given
+
+    Input: 
+      ids: string[]
+  
+    Output: 
+      [AngularFireObject<Product>]
+  */
+
+  getAllByIds(ids:string[]):[Observable<any>] {
+    let orders:[Observable<any>] = [Observable.of(null)];
+
+    for (let id of ids){
+      orders.push(this.get(id).valueChanges());
+    }
+
+    // Remove first null element if more elements exist
+    if(orders.length > 1){
+      orders.splice(0, 1);
+    }    
+    return orders;
+  }
 }
