@@ -9,6 +9,8 @@ import { ProductFilterComponent } from './components/products/product-filter/pro
 import { ProductsComponent } from './components/products/products.component';
 import { ProductPageComponent } from './components/product-page/product-page.component';
 import { CheckOutComponent } from './components/check-out/check-out.component';
+import { CompletedOrdersComponent } from './components/completed-orders/completed-orders.component';
+import { ActiveCirclesComponent } from './components/active-circles/active-circles.component';
 
 @NgModule({
   declarations: [
@@ -17,7 +19,9 @@ import { CheckOutComponent } from './components/check-out/check-out.component';
     ProductsComponent,
     ProductFilterComponent,
     ProductPageComponent,
-    CheckOutComponent
+    CheckOutComponent,
+    CompletedOrdersComponent,
+    ActiveCirclesComponent
   ],
   imports: [
     SharedModule,
@@ -29,6 +33,7 @@ import { CheckOutComponent } from './components/check-out/check-out.component';
 
       { path: 'order-success', component: OrderSuccessComponent, canActivate: [AuthGuard] },
       { path: 'my-orders', component: MyOrdersComponent, canActivate: [AuthGuard] },
+      { path: 'completed-orders', component: CompletedOrdersComponent, canActivate: [AuthGuard] },
     
       { path: 'products', component: ProductsComponent },
       { path: 'products/:category', component: ProductsComponent },

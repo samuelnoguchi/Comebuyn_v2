@@ -1,0 +1,29 @@
+<div class ="orders-active">
+  <div *ngIf="completedCircles.length !=0; else noneActive">
+    <h2>Completed Circles</h2>
+    <table class="table">
+        <thead>
+            <tr>
+              <th>Title</th>
+              <th>Quantity</th>
+              <th>Status</th>
+              <th></th>
+            </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let p of completedCircles; index as i">
+              <td>{{ p.title }}</td>
+              <td>{{ quantities[i] }}</td>
+              <td>{{ status[i] ? 'Shipped' : 'Waiting to ship' }} </td>
+              <td>
+                  <a [routerLink]="['/product-page']" [queryParams]="{ productId: p.$key }">View Product</a>
+              </td>
+          </tr>
+        </tbody>
+    </table>
+  </div>
+
+  <ng-template #noneActive>
+      
+  </ng-template>
+</div>
