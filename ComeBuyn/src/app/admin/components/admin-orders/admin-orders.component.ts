@@ -1,26 +1,18 @@
-import { Component, OnDestroy } from '@angular/core';
-import { OrderService } from 'shared/services/order.service';
-import { Subscription } from 'rxjs';
+import { Component, OnInit } from '@angular/core';
+import { ProductService } from 'shared/services/product.service';
 
 @Component({
   selector: 'app-admin-orders',
   templateUrl: './admin-orders.component.html',
   styleUrls: ['./admin-orders.component.css']
 })
-export class AdminOrdersComponent implements OnDestroy {
+export class AdminOrdersComponent {
 
-  orders: any[];
-  filteredOrders: any[];
-  subscription: Subscription;
+  constructor(private productService: ProductService) { 
 
-  constructor(private orderService: OrderService) { 
-    this.subscription = this.orderService.getAll().subscribe(orders=>{
-      this.filteredOrders = this.orders =  orders;
-      console.log(this.filteredOrders);
-    });
+
   }
 
-  ngOnDestroy(){
-    this.subscription.unsubscribe();
-  }
+
+
 }
