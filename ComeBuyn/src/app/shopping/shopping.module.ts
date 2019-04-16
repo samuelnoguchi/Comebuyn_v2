@@ -11,6 +11,8 @@ import { ProductPageComponent } from './components/product-page/product-page.com
 import { CheckOutComponent } from './components/check-out/check-out.component';
 import { CompletedOrdersComponent } from './components/completed-orders/completed-orders.component';
 import { ActiveCirclesComponent } from './components/active-circles/active-circles.component';
+import { PopularProductsComponent } from './components/popular-products/popular-products.component';
+import { HomeComponent } from './components/home/home.component';
 
 @NgModule({
   declarations: [
@@ -21,7 +23,9 @@ import { ActiveCirclesComponent } from './components/active-circles/active-circl
     ProductPageComponent,
     CheckOutComponent,
     CompletedOrdersComponent,
-    ActiveCirclesComponent
+    ActiveCirclesComponent,
+    PopularProductsComponent,
+    HomeComponent
   ],
   imports: [
     SharedModule,

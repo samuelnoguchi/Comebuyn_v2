@@ -8,7 +8,7 @@ import { environment } from './../environments/environment';
 import { AdminModule } from './admin/admin.module';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { HomeComponent } from './core/components/home/home.component';
+import { HomeComponent } from './shopping/components/home/home.component';
 import { LoginComponent } from './core/components/login/login.component';
 import { CoreModule } from './core/core.module';
 import { ShoppingModule } from './shopping/shopping.module';
