@@ -1,0 +1,19 @@
+<div class="vertical-center">
+  <h2>Popular Products</h2>
+  <div>
+<a routerLink="products" class="ml-3">View more</a>
+  </div>
+  
+</div>
+
+<div class="products">
+  <div class="album bg-light">
+    <div class="container">
+      <div class="row">
+        <div *ngFor="let p of products$ | async" class="col-md-3 d-flex align-items-stretch">
+          <product-card [product]="p"></product-card>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

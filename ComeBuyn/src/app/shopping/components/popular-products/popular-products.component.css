@@ -1,0 +1,17 @@
+.products{
+    padding-top: 2%;
+    padding-bottom: 2%;
+}
+
+.flex-container {
+    display: flex;
+}
+
+.vertical-center {
+    display: flex;
+    align-items: center;
+}  
+
+.col-md-3{
+    padding-top: 2%;
+}
