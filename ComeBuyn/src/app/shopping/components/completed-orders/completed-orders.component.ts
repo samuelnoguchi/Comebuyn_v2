@@ -5,7 +5,7 @@ import { Observable, Subscription } from 'rxjs';
 import { AuthService } from 'shared/services/auth.service';
 import { OrderService } from 'shared/services/order.service';
 import { Order } from 'shared/models/order';
-import { map, isEmpty } from 'rxjs/operators';
+import { map } from 'rxjs/operators';
 
 @Component({
   selector: 'completed-orders',
@@ -27,37 +27,12 @@ export class CompletedOrdersComponent {
   constructor(private auth:AuthService, private orderService: OrderService) {
     this.auth.appUser$.subscribe(appUser=>{
       this.appUser = appUser;
-
-      // Removed the archived orders from the orders to check
-      let completedOrders = this.removeArchived();
-      
-      // If the user has orders
-      if(completedOrders != null && !this.isEmpty(completedOrders)){
-        console.log("hi")
-
-        this.orderIds = Object.keys(completedOrders);
-        this.status = Object.values(completedOrders);
+      if(this.appUser.myOrders){
+        this.orderIds = Object.keys(this.appUser.myOrders);
+        this.status = Object.values(this.appUser.myOrders);
         this.getProductIds();
       }
     });
-  }
-
-  isEmpty(ob:Object):boolean{
-    let numKeys = 0;
-    for (let key of Object.keys(ob)){
-      numKeys++;
-    }
-    return numKeys == 0 ? true: false;
-  }
-
-  removeArchived(){
-    let notArchived = this.appUser.myOrders;
-    for (let order of Object.keys(notArchived)){
-      if(notArchived[order] === true){
-        delete notArchived[order]
-      }
-    }
-    return notArchived;
   }
 
   //Return list of products

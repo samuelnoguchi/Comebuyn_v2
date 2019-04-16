@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
 import { AngularFireDatabase, AngularFireObject } from '@angular/fire/database';
 import * as firebase from 'firebase';
-import { map, switchMap } from 'rxjs/operators';
 import { AppUser } from 'shared/models/app-user';
 
 @Injectable({
@@ -18,11 +17,15 @@ export class UserService {
     });
   }
 
-  get(uid): AngularFireObject<AppUser> {
+  get(uid: string): AngularFireObject<AppUser> {
     return this.db.object('/users/' + uid);
   }
 
-  update(uid, appUser:AppUser){
+  update(uid: string, appUser:AppUser){
     return this.db.object('/users/' + uid).update(appUser);
   }
+
+  
+
+
 }
