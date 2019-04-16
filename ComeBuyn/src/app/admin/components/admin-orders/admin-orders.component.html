@@ -1,8 +1,4 @@
 <h2>Orders</h2>
-<input 
-  #query
-  (keyup)="filter(query.value)" 
-  type="text" class="form-control" placeholder="Search...">
 
 <table class="table">
   <thead>
@@ -13,11 +9,11 @@
       </tr>
   </thead>
   <tbody>
-      <tr *ngFor="let p of filteredProducts ">
-          <td>{{ p.title }}</td>
-          <td>{{ p.price }}</td>
+      <tr *ngFor="let o of filteredOrders ">
+          <td>{{ o.product.title }}</td>
+          <td>{{ o.product.price }}</td>
           <td>
-              <a [routerLink]="['/admin/products/', p.$key ]">Edit</a>
+              <a [routerLink]="['/admin/orders/', o.$key ]">Edit</a>
           </td>
       </tr>
   </tbody>

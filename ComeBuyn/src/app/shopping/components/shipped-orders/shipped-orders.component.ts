@@ -1,18 +1,19 @@
 import { Component, OnInit } from '@angular/core';
+import { Subscription, Observable } from 'rxjs';
 import { AppUser } from 'shared/models/app-user';
+import { Order } from 'shared/models/order';
 import { Product } from 'shared/models/product';
-import { Observable, Subscription } from 'rxjs';
 import { AuthService } from 'shared/services/auth.service';
 import { OrderService } from 'shared/services/order.service';
-import { Order } from 'shared/models/order';
-import { map, isEmpty } from 'rxjs/operators';
+import { map } from 'rxjs/operators';
+import { ArchivedOrderService } from 'shared/services/archived-order.service';
 
 @Component({
-  selector: 'completed-orders',
-  templateUrl: './completed-orders.component.html',
-  styleUrls: ['./completed-orders.component.css']
+  selector: 'shipped-orders',
+  templateUrl: './shipped-orders.component.html',
+  styleUrls: ['./shipped-orders.component.css']
 })
-export class CompletedOrdersComponent {
+export class ShippedOrdersComponent {
 
   quantitySub:Subscription;
 
@@ -24,12 +25,12 @@ export class CompletedOrdersComponent {
   orderIds:string[] = [];
   completedCircles:Product[] = [];
 
-  constructor(private auth:AuthService, private orderService: OrderService) {
+  constructor(private auth:AuthService, private archivedOrderService: ArchivedOrderService) {
     this.auth.appUser$.subscribe(appUser=>{
       this.appUser = appUser;
 
       // Removed the archived orders from the orders to check
-      let completedOrders = this.removeArchived();
+      let completedOrders = this.removeNotArchived();
       
       // If the user has orders
       if(completedOrders != null && !this.isEmpty(completedOrders)){
@@ -50,10 +51,10 @@ export class CompletedOrdersComponent {
     return numKeys == 0 ? true: false;
   }
 
-  removeArchived(){
+  removeNotArchived(){
     let notArchived = this.appUser.myOrders;
     for (let order of Object.keys(notArchived)){
-      if(notArchived[order] === true){
+      if(notArchived[order] === false){
         delete notArchived[order]
       }
     }
@@ -62,7 +63,7 @@ export class CompletedOrdersComponent {
 
   //Return list of products
   getProductIds(){
-    this.orders$ = this.orderService.getAllByIds(this.orderIds);
+    this.orders$ = this.archivedOrderService.getAllByIds(this.orderIds);
 
     for (let pIndex = 0; pIndex < this.orders$.length; pIndex++){      
       this.orders$[pIndex].subscribe(o=>{
