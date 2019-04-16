@@ -24,9 +24,7 @@ export class ProductService {
 
 
   /*  getAll() 
-
       Get all producdts in db
-
       Input: none
     
       Output: list of all products in db, with form:
@@ -57,9 +55,7 @@ export class ProductService {
   }
 
 /*  getAllByCategory() 
-
   Get all products in db with correct category
-
   Input: category:string
  
   Output: (list of all products in db with category matching input, with form)
@@ -89,9 +85,7 @@ export class ProductService {
   }
 
   /*  getAllByIds() 
-
   Get all products with given
-
   Input: 
     ids: string[]
  
@@ -115,9 +109,7 @@ export class ProductService {
   }
 
   /*  getAll() 
-
       Get all producdts in db
-
       Input: none
     
       Output: list of all products in db, with form:
@@ -149,9 +141,7 @@ export class ProductService {
 
 
 /*  get() 
-
   Get single product in db, by productID
-
   Input: 
     productId: string
  

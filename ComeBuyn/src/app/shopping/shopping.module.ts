@@ -13,6 +13,7 @@ import { CompletedOrdersComponent } from './components/completed-orders/complete
 import { ActiveCirclesComponent } from './components/active-circles/active-circles.component';
 import { PopularProductsComponent } from './components/popular-products/popular-products.component';
 import { HomeComponent } from './components/home/home.component';
+import { ShippedOrdersComponent } from './components/shipped-orders/shipped-orders.component';
 
 @NgModule({
   declarations: [
@@ -25,7 +26,8 @@ import { HomeComponent } from './components/home/home.component';
     CompletedOrdersComponent,
     ActiveCirclesComponent,
     PopularProductsComponent,
-    HomeComponent
+    HomeComponent,
+    ShippedOrdersComponent
   ],
   imports: [
     SharedModule,
