@@ -114,6 +114,39 @@ export class ProductService {
     return products;
   }
 
+  /*  getAll() 
+
+      Get all producdts in db
+
+      Input: none
+    
+      Output: list of all products in db, with form:
+        $key: string
+        category: string
+        imageUrl: string
+        numBuyers: number
+        numBuyersRequired: number
+        price: number
+        title: string
+  */
+
+ getPopular() {
+  let afList = this.db.list('/products' , ref => ref.limitToFirst(4));
+  
+  return afList.snapshotChanges().pipe(
+    map(action => {
+    return action.map(
+      item => {
+        //console.log(item.payload.val())
+        const $key = item.payload.key;
+        const data = { $key, ...item.payload.val() };
+        
+        //console.log(data)
+        return data;
+    });
+  }));
+}
+
 
 /*  get() 
 
