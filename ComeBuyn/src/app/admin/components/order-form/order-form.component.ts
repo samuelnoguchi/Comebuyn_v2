@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { OrderService } from 'shared/services/order.service';
 import { Order } from 'shared/models/order';
 
@@ -27,7 +27,7 @@ export class OrderFormComponent {
 
   buyerIds:any[]=[];
 
-  constructor(private orderService:OrderService, private route: ActivatedRoute) {
+  constructor(private orderService:OrderService, private route: ActivatedRoute, private router:Router) {
     this.id = this.route.snapshot.paramMap.get('id');
     
     this.orderService.get(this.id).valueChanges().subscribe(order=>{
@@ -35,5 +35,10 @@ export class OrderFormComponent {
       this.buyerIds = Object.values(order.product.buyers);
       
     });
+  }
+
+  processOrder(){
+    this.orderService.archiveOrder(this.id, this.order);
+    this.router.navigate(['/admin/orders']);
   }
 }

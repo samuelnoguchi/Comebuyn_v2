@@ -9,20 +9,16 @@
         <tr>
             <th>Buyer Number</th>
             <th>User ID</th>
-            <th></th>
         </tr>
     </thead>
     <tbody>
         <tr *ngFor="let buyer of buyerIds; index as i ">
             <td>{{ i + 1 }}</td>
             <td>{{ buyer }}</td>
-            <td>
-                <div>Remove</div>
-            </td>
         </tr>
     </tbody>
 </table>
 
-
+<Button (click)="processOrder()" class="btn btn-primary">Ship</Button>
 
 </div>
