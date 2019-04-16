@@ -58,7 +58,7 @@ export class OrderService {
       AngularFireObject<Product>
   */
 
-  get(orderId):AngularFireObject<Product>{
+  get(orderId):AngularFireObject<Order>{
     return this.db.object('/orders/' + orderId);
   }
 
