@@ -1,3 +1,24 @@
-<p>
-  order-form works!
-</p>
+<div>
+  <h1> OrderId: {{ id }} </h1>
+  <h2> Product name: {{ order.product.title }} </h2>
+  
+  <a *ngIf="order.productId" [routerLink]="['/admin/products/', order.productId ]"> View Product </a>
+  
+  <table class="table">
+    <thead>
+        <tr>
+            <th>Buyer Number</th>
+            <th>User ID</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let buyer of buyerIds; index as i ">
+            <td>{{ i + 1 }}</td>
+            <td>{{ buyer }}</td>
+        </tr>
+    </tbody>
+</table>
+
+<Button (click)="processOrder()" class="btn btn-primary">Ship</Button>
+
+</div>
