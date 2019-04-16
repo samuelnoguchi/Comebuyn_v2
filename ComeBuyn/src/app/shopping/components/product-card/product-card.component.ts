@@ -1,4 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
+import { Product } from 'shared/models/product';
 
 @Component({
   selector: 'product-card',
@@ -7,7 +8,12 @@ import { Component, OnInit, Input } from '@angular/core';
 })
 export class ProductCardComponent {
 
-  @Input('product') product;
-  constructor() { }
+  percent:number;
+
+  @Input('product') product:Product;
+  constructor() { 
+    
+    
+  }
 
 }

@@ -4,3 +4,13 @@
     object-fit: cover;
 }
 
+.card-price{
+    padding-bottom: 3%;
+}
+
+.vertical-center {
+    display: flex;
+    align-items: center;
+} 
+
+
