@@ -1,24 +1,28 @@
 <div class="card mb-4 shadow-sm">
   <div class="img-container">
+    <a 
+    routerLink="/product-page"
+    [queryParams]="{ productId: product.$key }"
+    >
       <img class="card-img-top img-responsive" [src]="product.imageUrl" alt="Card image cap">
+    </a>
   </div>
   <div class="card-body">
     <div class="card-body-content">
+      <a 
+      routerLink="/product-page"
+      [queryParams]="{ productId: product.$key }"
+      >
         <h5 class="card-title">{{ product.title }}</h5>
-        <div class="card-text">
-          <div class="card-price">
-              {{ product.price | currency:'USD':true }} 
-          </div>
-          <div class="card-num-buyers">
-              {{ product.numBuyers }} / {{ product.numBuyersRequired }} 
-          </div>
+      </a>
+      <div class="card-text">
+        <div class="card-price">
+            {{ product.price | currency:'USD':true }} 
         </div>
-        <a 
-          routerLink="/product-page"
-          [queryParams]="{ productId: product.$key }"
-          class="btn btn-primary">
-            View Product
-        </a>
+        <div class="card-percent">
+          <p><ngb-progressbar type="primary" [value]="product.numBuyers / product.numBuyersRequired * 100"></ngb-progressbar></p>
+        </div>
+      </div>
     </div>   
   </div>
 </div>
