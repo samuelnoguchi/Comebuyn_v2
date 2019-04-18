@@ -8,16 +8,20 @@ import { ProductFormComponent } from './components/product-form/product-form.com
 import { AdminAuthGuard } from './services/admin-auth-guard.service';
 import { AdminOrdersComponent } from './components/admin-orders/admin-orders.component';
 import { OrderFormComponent } from './components/order-form/order-form.component';
+import { ImageUploadComponent } from './components/image-upload/image-upload.component';
+import { ImageCropperModule } from 'ngx-image-cropper';
 
 @NgModule({
   declarations: [
     AdminProductsComponent,
     ProductFormComponent,
     AdminOrdersComponent,
-    OrderFormComponent
+    OrderFormComponent,
+    ImageUploadComponent
   ],
   imports: [
     SharedModule,
+    ImageCropperModule,
     RouterModule.forChild([
       { path: 'admin/products', 
         component: AdminProductsComponent, 
@@ -38,8 +42,10 @@ import { OrderFormComponent } from './components/order-form/order-form.component
       { path: 'admin/orders/:id', 
         component: OrderFormComponent, 
         canActivate:[AuthGuard, AdminAuthGuard] },  
-
-
+      
+      { path: 'admin/image-upload', 
+        component: ImageUploadComponent, 
+        canActivate:[AuthGuard, AdminAuthGuard] },  
     ])
   ], 
   providers: [
