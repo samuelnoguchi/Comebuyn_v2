@@ -1,38 +1,29 @@
+    
 <div class="card mb-4 shadow-sm">
-  <div class="img-container">
-    <a 
-    routerLink="/product-page"
-    [queryParams]="{ productId: product.$key }">
-      <img class="card-img-top img-responsive" [src]="product.imageUrl" alt="Card image cap">
-    </a>
-  </div>
-  <div class="card-body">
-    <div class="card-body-content"> 
+    <div class="img-container">
       <a 
-        routerLink="/product-page"
-        [queryParams]="{ productId: product.$key }">
-        <h5 class="card-title">{{ product.title }}</h5>
+      routerLink="/product-page"
+      [queryParams]="{ productId: product.$key }"
+      >
+        <img class="card-img-top img-responsive" [src]="product.imageUrl" alt="Card image cap">
       </a>
-      <div class="card-text">
-        <div class="card-price">
-            {{ product.price | currency:'USD':true }} 
-        </div> 
-
-        <div class="row">
-          <div class="col-8">
-            <div *ngIf="product">        
-              <p>
-                <ngb-progressbar type="primary" [value]="product.numBuyers / product.numBuyersRequired * 100"></ngb-progressbar>
-              </p>   
-            </div>
+    </div>
+    <div class="card-body">
+      <div class="card-body-content">
+        <a 
+        routerLink="/product-page"
+        [queryParams]="{ productId: product.$key }"
+        >
+          <h5 class="card-title">{{ product.title }}</h5>
+        </a>
+        <div class="card-text">
+          <div class="card-price">
+              {{ product.price | currency:'USD':true }} 
           </div>
-          <div class="col-4">
-            <div class = "card-buyers">
-                {{ product.numBuyers }} / {{ product.numBuyersRequired }}
-            </div>
+          <div class="card-percent">
+            <p><ngb-progressbar type="primary" [value]="product.numBuyers / product.numBuyersRequired * 100"></ngb-progressbar></p>
           </div>
         </div>
       </div>   
-    </div>   
+    </div>
   </div>
-</div>

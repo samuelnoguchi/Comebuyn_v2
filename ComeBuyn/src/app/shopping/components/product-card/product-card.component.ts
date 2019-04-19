@@ -7,13 +7,8 @@ import { Product } from 'shared/models/product';
   styleUrls: ['./product-card.component.css']
 })
 export class ProductCardComponent {
-
-  percent:number;
-
-  @Input('product') product:Product;
-  constructor() { 
-    
-    
-  }
+  
+  @Input('product') product;
+  constructor() {}
 
 }

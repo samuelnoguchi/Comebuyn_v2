@@ -2,6 +2,7 @@ import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { AngularFireAuthModule } from '@angular/fire/auth';
 import { AngularFireDatabaseModule } from '@angular/fire/database';
+import { AngularFireStorageModule } from '@angular/fire/storage';
 import { FormsModule } from '@angular/forms';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { CustomFormsModule } from 'ng2-validation';
@@ -26,6 +27,7 @@ import { ProductPageComponent } from 'app/shopping/components/product-page/produ
     CustomFormsModule,
     AngularFireDatabaseModule,
     AngularFireAuthModule,
+    AngularFireStorageModule,
     RouterModule.forChild([]),
     NgbModule.forRoot()
   ],
@@ -36,6 +38,7 @@ import { ProductPageComponent } from 'app/shopping/components/product-page/produ
     CustomFormsModule,
     AngularFireDatabaseModule,
     AngularFireAuthModule,
+    AngularFireStorageModule,
     NgbModule.forRoot().ngModule
   ],
   providers: [

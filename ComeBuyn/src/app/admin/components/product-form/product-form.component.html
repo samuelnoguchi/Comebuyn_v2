@@ -33,25 +33,30 @@
             <input #numBuyersRequired="ngModel" [(ngModel)]="product.numBuyersRequired" name="numBuyersRequired" id="numBuyersRequired" type="number" class="form-control" required>
             <div class="alert alert-danger" *ngIf="numBuyersRequired.touched && numBuyersRequired.invalid">Number of buyers is required</div>
         </div>
-        <div class="form-group">
-            <label for="imageUrl">Image URL</label>
-            <input #imageUrl="ngModel" [(ngModel)]="product.imageUrl" name="imageUrl" id="imageUrl" type="text" class="form-control" required url>
-            <div class="alert alert-danger" *ngIf="imageUrl.touched && imageUrl.invalid">
-              <div *ngIf="imageUrl.errors.required">Image URL is required</div>
-              <div *ngIf="imageUrl.errors.url">URL not valid</div>
-            </div>
+        <div class="image-upload">
+          <input type="file" (change)="fileChangeEvent($event)" />
+
+          <image-cropper
+              [imageChangedEvent]="imageChangedEvent"
+              [maintainAspectRatio]="true"
+              [aspectRatio]="4 / 4"
+              [resizeToWidth]="256"
+              format="png"
+              (imageCropped)="imageCropped($event)">
+        </image-cropper>
+
         </div>
+
         <button class="btn btn-primary">Save</button>
         <button type="button" (click)="delete()" class="btn btn-danger">Delete</button>
       </form>
   </div>
   <div *ngIf="product.title" class="col-md-6">
     <div class="card" style="width: 18rem;">
-        <img class="card-img-top" [src]="product.imageUrl" *ngIf="product.imageUrl" >
+        <img class="card-img-top" [src]="product.imageUrl"  >
         <div class="card-body">
           <h5 class="card-title">{{ product.title }}</h5>
           <p class="card-text">{{ product.price | currency:'USD':true }} </p>
-          
         </div>
       </div>
   </div>
