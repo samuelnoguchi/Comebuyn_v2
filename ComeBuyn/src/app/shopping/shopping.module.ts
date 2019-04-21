@@ -14,6 +14,7 @@ import { ActiveCirclesComponent } from './components/active-circles/active-circl
 import { PopularProductsComponent } from './components/popular-products/popular-products.component';
 import { HomeComponent } from './components/home/home.component';
 import { ShippedOrdersComponent } from './components/shipped-orders/shipped-orders.component';
+import { SearchResultsComponent } from './components/search-results/search-results.component';
 
 @NgModule({
   declarations: [
@@ -27,7 +28,8 @@ import { ShippedOrdersComponent } from './components/shipped-orders/shipped-orde
     ActiveCirclesComponent,
     PopularProductsComponent,
     HomeComponent,
-    ShippedOrdersComponent
+    ShippedOrdersComponent,
+    SearchResultsComponent
   ],
   imports: [
     SharedModule,
@@ -43,6 +45,8 @@ import { ShippedOrdersComponent } from './components/shipped-orders/shipped-orde
     
       { path: 'products', component: ProductsComponent },
       { path: 'products/:category', component: ProductsComponent },
+
+      { path: 'search-results/:query', component: SearchResultsComponent },
 
 
       
