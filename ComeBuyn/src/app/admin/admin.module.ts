@@ -10,6 +10,11 @@ import { AdminOrdersComponent } from './components/admin-orders/admin-orders.com
 import { OrderFormComponent } from './components/order-form/order-form.component';
 import { ImageUploadComponent } from './components/image-upload/image-upload.component';
 import { ImageCropperModule } from 'ngx-image-cropper';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import {  MatChipsModule,  
+          MatIconModule,
+          MatInputModule, } from '@angular/material';
+import { ChipInputComponent } from './components/chip-input/chip-input.component';
 
 @NgModule({
   declarations: [
@@ -17,10 +22,15 @@ import { ImageCropperModule } from 'ngx-image-cropper';
     ProductFormComponent,
     AdminOrdersComponent,
     OrderFormComponent,
-    ImageUploadComponent
+    ImageUploadComponent,
+    ChipInputComponent
   ],
   imports: [
     SharedModule,
+    BrowserAnimationsModule,
+    MatChipsModule,  
+    MatIconModule,
+    MatInputModule,
     ImageCropperModule,
     RouterModule.forChild([
       { path: 'admin/products', 

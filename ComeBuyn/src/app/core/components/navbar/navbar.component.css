@@ -5,3 +5,12 @@
 .nav-link{
     cursor: pointer;
 }
+
+.search-bar{
+    margin-left: 30%;
+}
+
+button {
+    padding-left: 16px;
+    padding-right: 16px;
+}

@@ -19,9 +19,8 @@ export class CheckOutComponent implements OnDestroy {
     numBuyers:null,
     numBuyersRequired:null,
     price:null,
-    buyers:{
-      
-    },
+    buyers:{},
+    tags:{},
     imageUrl:null,
     title:null
   };

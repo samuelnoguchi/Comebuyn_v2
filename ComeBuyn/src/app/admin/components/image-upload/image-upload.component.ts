@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { ImageCroppedEvent } from 'ngx-image-cropper';
 import { AngularFireStorage } from '@angular/fire/storage';
 import { AngularFireDatabase } from '@angular/fire/database';
@@ -12,6 +12,9 @@ import { routerNgProbeToken } from '@angular/router/src/router_module';
   styleUrls: ['./image-upload.component.css']
 })
 export class ImageUploadComponent {
+    
+  @Output() image = new EventEmitter<string>();
+
   imageChangedEvent: any = '';
   croppedImage: any = '';
 
@@ -22,14 +25,6 @@ export class ImageUploadComponent {
   }
   imageCropped(event: ImageCroppedEvent) {
       this.croppedImage = event.base64;
-  }
-  imageLoaded() {
-      // show cropper
-  }
-  cropperReady() {
-      // cropper ready
-  }
-  loadImageFailed() {
-      // show message
+      this.image.emit(this.croppedImage);
   }
 }

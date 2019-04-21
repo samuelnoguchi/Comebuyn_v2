@@ -19,6 +19,7 @@ export class OrderFormComponent {
       numBuyers:null,
       numBuyersRequired:null,
       buyers: {},
+      tags: {},
       price:null,
       imageUrl:null,
       title:null

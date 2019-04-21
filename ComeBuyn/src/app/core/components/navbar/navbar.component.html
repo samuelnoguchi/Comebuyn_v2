@@ -6,7 +6,15 @@
   </button>
 
   <div class="collapse navbar-collapse" [class.show]="navbarOpen"  id="navbarsExampleDefault">
-    <ul class="navbar-nav ml-auto">    
+  
+    <div class="search-bar form-inline">
+      <input (keyup.enter)="search(searchContent)" #searchContent name="search" id="search" type="text" class="form-control"> 
+      <button (click)="search(searchContent)" class="btn btn-primary">Search</button>
+    </div>
+
+    
+    
+    <ul class="navbar-nav ml-auto">  
       <ng-template #anonymousUser>
           <li class="nav-item">
             <a class="nav-link" (click)="login()">Login or Sign up</a>

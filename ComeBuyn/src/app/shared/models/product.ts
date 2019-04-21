@@ -5,6 +5,7 @@ export interface Product {
     numBuyers: number
     numBuyersRequired: number
     buyers: {}
+    tags: {}
     price: number
     title: string
 }

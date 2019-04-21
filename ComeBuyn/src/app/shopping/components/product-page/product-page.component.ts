@@ -17,6 +17,7 @@ export class ProductPageComponent {
     numBuyers:null,
     numBuyersRequired:null,
     buyers:null,
+    tags:{},
     price:null,
     imageUrl:null,
     title:null

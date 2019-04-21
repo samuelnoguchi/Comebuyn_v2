@@ -18,6 +18,11 @@ export class NavbarComponent
     });
   }
 
+  search(searchContent){
+    console.log(searchContent.value);
+    searchContent.value = '';
+  }
+
   toggleNavbar() {
     this.navbarOpen = !this.navbarOpen;
     console.log(this.navbarOpen)
