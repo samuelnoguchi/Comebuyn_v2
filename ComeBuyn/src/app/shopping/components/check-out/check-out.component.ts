@@ -4,6 +4,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { Product } from 'shared/models/product';
 import { CheckOutService } from 'app/shopping/services/check-out.service';
+import { FormsModule }   from '@angular/forms';
 
 @Component({
   selector: 'app-check-out',
@@ -19,6 +20,7 @@ export class CheckOutComponent implements OnDestroy {
     numBuyers:null,
     numBuyersRequired:null,
     price:null,
+    description:null,
     buyers:{},
     tags:{},
     imageUrl:null,

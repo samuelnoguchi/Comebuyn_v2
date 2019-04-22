@@ -1,3 +1,20 @@
 .card-percent{
     margin-top: 4%;
 }
+
+.thumbnail:hover {
+    position: relative;
+    top:-5px;
+    left:-5px;
+    width:105%;
+    height:auto;
+    display:block;
+    z-index:999;
+    overflow: hidden;
+}
+
+.img-container {
+    margin: 0 auto;
+    overflow: hidden;
+    position: relative;
+  }

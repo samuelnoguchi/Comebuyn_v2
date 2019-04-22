@@ -11,7 +11,7 @@
     <ul class="navbar-nav mr-auto">    
       <li ngbDropdown class="nav-item dropdown">
         <a ngbDropdownToggle class="nav-link dropdown-toggle" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-          Shop
+          Shopping
         </a>
         <div ngbDropdownMenu class="dropdown-menu multi-column columns-2" aria-labelledby="dropdown01">
           <div class="row">
@@ -27,7 +27,7 @@
                   <li><a routerLink="/search-results/apple">Apple</a></li>
                   <li><a href="/search-results/asus">Asus</a></li>
                   <li><a href="/search-results/dell">Dell</a></li>  
-                  <li><a href="/search-results/samsung">SamSung</a></li>
+                  <li><a href="/search-results/samsung">Samsung</a></li>
                   <li><a href="/search-results/toshiba">Toshiba</a></li>
                 </ul>
               </div>
@@ -35,7 +35,6 @@
         </div>
       </li>
     </ul>
-
     <div class="search-bar form-inline">
       <input (keyup.enter)="search(searchContent)" #searchContent name="search" id="search" type="text" class="form-control search" placeholder="Search for a product..." autocomplete="off"> 
       <button (click)="search(searchContent)" class="btn btn-primary search-button">Search</button>
