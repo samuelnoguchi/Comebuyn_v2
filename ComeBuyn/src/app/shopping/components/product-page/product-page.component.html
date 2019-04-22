@@ -8,15 +8,17 @@
 
     <p> {{ product.numBuyers }} / {{ product.numBuyersRequired }} </p>
 
-    <form #f="ngForm" (ngSubmit)="checkout(f.value)">
-      <div class="form-group">
-        <label for="quantity">Quantity</label>
-        <select #quantity="ngModel" [(ngModel)]="quantitySelection" name="quantity" id="quantity" class="form-control" required>
-          <option *ngFor="let num of numAvailable" [value]="num">{{ num }}</option>
-        </select>
-      </div>
-      <button class="btn btn-primary">Join Circle</button>
-    </form>
+    <div class="join">
+      <form #f="ngForm" (ngSubmit)="checkout(f.value)">
+        <div class="form-group">
+          <label for="quantity">Quantity</label>
+          <select #quantity="ngModel" [(ngModel)]="quantitySelection" name="quantity" id="quantity" class="form-control" required>
+            <option *ngFor="let num of numAvailable" [value]="num">{{ num }}</option>
+          </select>
+        </div>
+        <button class="btn btn-primary">Join Circle</button>
+      </form>
+    </div>
     
   </div>
   <div class="col-md-5">
