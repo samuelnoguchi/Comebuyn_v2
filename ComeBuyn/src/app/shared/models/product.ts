@@ -2,6 +2,7 @@ export interface Product {
     $key: string
     category: string
     imageUrl: string
+    description: string
     numBuyers: number
     numBuyersRequired: number
     buyers: {}

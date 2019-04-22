@@ -28,6 +28,12 @@
             </select>
             <div class="alert alert-danger" *ngIf="category.touched && category.invalid">Category is required</div>
         </div>
+
+        <div class="form-group">
+            <label for="descripion">Description</label>
+            <textarea #description="ngModel" [(ngModel)]="product.description" name="description" class="form-control" rows="5" id="description"></textarea>
+          </div>
+          
         <div class="form-group">
             <label for="numBuyersRequired">Number of buyers required</label>
             <input #numBuyersRequired="ngModel" [(ngModel)]="product.numBuyersRequired" name="numBuyersRequired" id="numBuyersRequired" type="number" class="form-control" required>

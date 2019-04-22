@@ -1,0 +1,20 @@
+.product-price{
+    margin-top: 2%;
+    margin-bottom: 2%;
+    font-weight:bold;
+}
+
+.product-image{
+    
+    padding:10%;
+}
+
+.join{
+    margin-top: 2%;
+    border-radius: 25px;
+    
+}
+
+.flex-container {
+    display: flex;
+  }

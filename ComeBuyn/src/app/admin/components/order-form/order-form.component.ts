@@ -17,6 +17,7 @@ export class OrderFormComponent {
       $key:null,
       category:null,
       numBuyers:null,
+      description:null,
       numBuyersRequired:null,
       buyers: {},
       tags: {},

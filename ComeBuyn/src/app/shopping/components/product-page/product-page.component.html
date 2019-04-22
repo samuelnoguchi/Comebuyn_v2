@@ -3,12 +3,17 @@
   <div class="col-md-7">
     <h2 class="featurette-heading"> {{ product.title }} </h2>
     <p class="lead"> {{ product.category }}  </p>
+    <p><ngb-progressbar type="primary" [value]="product.numBuyers / product.numBuyersRequired * 100"></ngb-progressbar></p>
     <hr>
-    <p> {{ product.price | currency:'USD':true }} </p>
+    
+    <div class="product-price">{{ product.price | currency:'USD':true }} </div>
 
-    <p> {{ product.numBuyers }} / {{ product.numBuyersRequired }} </p>
+    <p>{{ product.description }}</p>
 
     <div class="join">
+        
+        <p>Users currently in circle: <b> {{ product.numBuyers }} / {{ product.numBuyersRequired }} </b> </p>
+      
       <form #f="ngForm" (ngSubmit)="checkout(f.value)">
         <div class="form-group">
           <label for="quantity">Quantity</label>
@@ -16,13 +21,15 @@
             <option *ngFor="let num of numAvailable" [value]="num">{{ num }}</option>
           </select>
         </div>
-        <button class="btn btn-primary">Join Circle</button>
+        <button class="btn btn-primary btn-lg btn-block">Join Circle</button>
       </form>
     </div>
     
   </div>
   <div class="col-md-5">
+    <div class="product-image">
       <img class="featurette-image img-fluid mx-auto" [src]="image" alt="Loading...">
+    </div>  
   </div>
 </div>
 

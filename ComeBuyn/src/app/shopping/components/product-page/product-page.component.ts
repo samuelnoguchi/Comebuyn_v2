@@ -15,6 +15,7 @@ export class ProductPageComponent {
     $key:null,
     category:null,
     numBuyers:null,
+    description:null,
     numBuyersRequired:null,
     buyers:null,
     tags:{},
