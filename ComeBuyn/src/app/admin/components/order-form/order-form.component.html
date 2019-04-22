@@ -8,14 +8,24 @@
   <table class="table">
     <thead>
         <tr>
-            <th>Buyer Number</th>
             <th>User ID</th>
+            <th>Name</th>
+            <th>Address</th>
+            <th>Country</th>
+            <th>State</th>
+            <th>Zip Code</th>
+            
         </tr>
     </thead>
     <tbody>
         <tr *ngFor="let buyer of buyerIds; index as i ">
-            <td>{{ i + 1 }}</td>
             <td>{{ buyer }}</td>
+            <td>{{ shippingInfo[i].firstName }} {{ shippingInfo[i].lastName }}</td>
+            <td>{{ shippingInfo[i].address }} {{ shippingInfo[i].address2 }}</td>
+            <td>{{ shippingInfo[i].country }}</td>
+            <td>{{ shippingInfo[i].state }}</td>
+            <td>{{ shippingInfo[i].zip }}</td>
+
         </tr>
     </tbody>
 </table>
