@@ -7,13 +7,40 @@
 
   <div class="collapse navbar-collapse" [class.show]="navbarOpen"  id="navbarsExampleDefault">
   
+
+    <ul class="navbar-nav mr-auto">    
+      <li ngbDropdown class="nav-item dropdown">
+        <a ngbDropdownToggle class="nav-link dropdown-toggle" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          Shop
+        </a>
+        <div ngbDropdownMenu class="dropdown-menu multi-column columns-2" aria-labelledby="dropdown01">
+          <div class="row">
+              <div class="col-sm-6">
+                <ul class="multi-column-dropdown">
+                    <li><div class="dropdown-heading"><b>Categories</b></div><li>
+                  <li *ngFor="let category of categories$ | async"><a routerLink="/products" [queryParams]="{ category: category.$key }">{{ category.name }}</a></li>
+                </ul>
+              </div>
+              <div class="col-sm-6">
+                <ul class="multi-column-dropdown">
+                  <li><div class="dropdown-heading"><b>Brands</b></div><li>
+                  <li><a routerLink="/search-results/apple">Apple</a></li>
+                  <li><a href="/search-results/asus">Asus</a></li>
+                  <li><a href="/search-results/dell">Dell</a></li>  
+                  <li><a href="/search-results/samsung">SamSung</a></li>
+                  <li><a href="/search-results/toshiba">Toshiba</a></li>
+                </ul>
+              </div>
+            </div>  
+        </div>
+      </li>
+    </ul>
+
     <div class="search-bar form-inline">
       <input (keyup.enter)="search(searchContent)" #searchContent name="search" id="search" type="text" class="form-control search" placeholder="Search for a product..." autocomplete="off"> 
       <button (click)="search(searchContent)" class="btn btn-primary search-button">Search</button>
     </div>
 
-
- 
     <ul class="navbar-nav ml-auto">  
       <ng-template #anonymousUser>
           <li class="nav-item">
