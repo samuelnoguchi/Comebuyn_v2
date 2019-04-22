@@ -35,8 +35,6 @@ export class ProductFormComponent implements OnInit {
   tags: {};
   tagsList:[] = [];
   
-
-
   constructor(
     private categoryService: CategoryService,
     private productService: ProductService,
@@ -66,20 +64,24 @@ export class ProductFormComponent implements OnInit {
   generateTagObject(product){
     let obj = {};
     let numTags = 0;
+    let tagsSet: Set<string> = new Set();
     // Generate user input tags
     for (let tag of this.tagsList){
       let tagKey:string = 'tag' + numTags;
       let tagName:string = tag['name'];
+      tagsSet.add(tagName);
       
       obj[tagKey] = tagName;
       numTags++;
     }
 
     // Generate tags based on name
-    for (let word of product.title.split(" ")){
-      let tagKey:string = 'tag' + numTags;
-      obj[tagKey] = word.toLowerCase();
-      numTags++;
+    for (let word of product.title.toLowerCase().split(" ")){
+      if (!tagsSet.has(word)){
+        let tagKey:string = 'tag' + numTags;
+        obj[tagKey] = word.toLowerCase();
+        numTags++;
+      }
     }
     this.tags = obj;
   }
