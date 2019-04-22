@@ -2,9 +2,11 @@ import { Injectable } from '@angular/core';
 import { ProductService } from './product.service';
 import { UserService } from './user.service';
 import { Product } from 'shared/models/product';
+import { Buyer } from 'shared/models/buyer';
 import { OrderService } from './order.service';
 import { AppUser } from 'shared/models/app-user';
-import { User } from 'firebase';
+import { CompilePipeMetadata } from '@angular/compiler';
+
 
 
 @Injectable({
@@ -34,6 +36,7 @@ export class CircleService {
     let buyer =  "buyer";
     let productId = product.$key;
 
+  
     // Add circle to user
     this.addCircleToUser(userId, productId, quantity);
 
@@ -83,8 +86,10 @@ export class CircleService {
     let usersInCircle = new Set()
 
     // Generate unique list of users in circle
-    for (let userId of Object.values(product.buyers)){
-      usersInCircle.add(userId);
+    for (let buyer of Object.values(product.buyers)){
+      console.log(buyer['id']);
+      usersInCircle.add(buyer['id']);
+      
     }
 
     // Iterate over users in circle, removing the circle from the user and adding the order
@@ -147,12 +152,18 @@ export class CircleService {
   private addUserToCircle(buyerNumber:string, userId:string, product:Product, shippingInfo:{}): Product{
     // Add user id to product buyers list
     if(product.buyers){
-      product.buyers[buyerNumber] = userId;
+      product.buyers[buyerNumber] = {
+        id: userId,
+        shippingInfo: shippingInfo 
+      };
     }
     // Need to initalize buyers field if no current buyers
     else{
       product.buyers = {};
-      product.buyers[buyerNumber] = userId;
+      product.buyers[buyerNumber] = {
+        id: userId,
+        shippingInfo: shippingInfo 
+      };
     }
 
     // Increment the number of buyers

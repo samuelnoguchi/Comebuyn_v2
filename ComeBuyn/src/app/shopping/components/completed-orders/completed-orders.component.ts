@@ -82,7 +82,8 @@ export class CompletedOrdersComponent {
     return this.auth.getUserKey().pipe(
       map(key=>{
         for (let buyer of Object.values(product.buyers)){
-          if(buyer === key){
+          let buyerId = buyer['id'];
+          if(buyerId === key){
             quantity++;
           }
         }

@@ -112,7 +112,8 @@ export class OrderService {
 
     // Get the buyers of the order
     for(let buyer of Object.values(order.product.buyers)){
-      buyerMap.add(buyer)
+      let buyerId = buyer['id'];
+      buyerMap.add(buyerId);
     }
 
     // Generate archived order

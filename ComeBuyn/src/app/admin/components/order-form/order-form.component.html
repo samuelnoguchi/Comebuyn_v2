@@ -1,9 +1,7 @@
-<p>
-  order-form works!
-</p>
 <div>
-  <h1> OrderId: {{ id }} </h1>
-  <h2> Product name: {{ order.product.title }} </h2>
+  
+  <h1> Product name: {{ order.product.title }} </h1>
+  <h2> OrderId: {{ id }} </h2>
   
   <a *ngIf="order.productId" [routerLink]="['/admin/products/', order.productId ]"> View Product </a>
   

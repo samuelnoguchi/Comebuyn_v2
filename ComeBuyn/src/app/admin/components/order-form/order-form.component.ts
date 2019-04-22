@@ -34,6 +34,8 @@ export class OrderFormComponent {
     
     this.orderService.get(this.id).valueChanges().subscribe(order=>{
       this.order = order;
+
+      // show shipping info
       this.buyerIds = Object.values(order.product.buyers);
       
     });
