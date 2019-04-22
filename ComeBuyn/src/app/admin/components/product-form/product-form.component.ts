@@ -4,11 +4,6 @@ import { ProductService } from 'shared/services/product.service';
 import { Router, ActivatedRoute } from '@angular/router';
 import 'rxjs/add/operator/take'; // Use to take 1 value, dont need to unsubscribe after
 import { Product } from 'shared/models/product';
-import { ImageCroppedEvent } from 'ngx-image-cropper';
-import {COMMA, ENTER} from '@angular/cdk/keycodes';
-import {MatChipInputEvent} from '@angular/material';
-
-
 
 @Component({
   selector: 'app-product-form',
@@ -42,19 +37,13 @@ export class ProductFormComponent implements OnInit {
     private route: ActivatedRoute) { 
     this.categories$ = categoryService.getAll();
 
-      this.categories$.subscribe(
-        action =>{
-          console.log(action)
-        }
-      ) 
-
-      this.id = this.route.snapshot.paramMap.get('id');
-      if (this.id) this.productService.get(this.id).valueChanges().take(1)
-        .subscribe(p=> {
-          this.croppedImage = p.imageUrl;
-          this.product = p;
-          this.tags = p.tags;
-        });
+    this.id = this.route.snapshot.paramMap.get('id');
+    if (this.id) this.productService.get(this.id).valueChanges().take(1)
+      .subscribe(p=> {
+        this.croppedImage = p.imageUrl;
+        this.product = p;
+        this.tags = p.tags;
+      });
   }
 
   getTags(tags: []){
