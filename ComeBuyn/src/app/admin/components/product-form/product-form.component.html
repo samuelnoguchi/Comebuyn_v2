@@ -35,6 +35,7 @@
         </div>
 
         <chip-input
+          (tagsOutput)="getTags($event)"
           [productTags]="tags"
         ></chip-input>
 

@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter, OnChanges, SimpleChanges } from '@angular/core';
 import { ENTER, COMMA } from '@angular/cdk/keycodes';
 import { MatChipInputEvent } from '@angular/material';
 
@@ -13,16 +13,25 @@ export interface Tag {
   templateUrl: './chip-input.component.html',
   styleUrls: ['./chip-input.component.css']
 })
-export class ChipInputComponent {
+export class ChipInputComponent implements OnChanges {
 
   @Input() productTags: {} = {};
+
+  ngOnChanges(changes:SimpleChanges){
+    if(this.productTags !=null ){
+      for(let tagKey of Object.keys(this.productTags)){
+        let tagName = this.productTags[tagKey];
+        this.tagNum++;
+        this.tagsList.push({name: tagName});
+      }
+    }
+    this.tagsOutput.emit(this.tagsList);
+  }
+
+
   @Output() tagsOutput = new EventEmitter<{}>();
 
-  constructor() { 
-    for(let tag of Object.keys(this.productTags)){
-      console.log(tag);
-    }
-  }
+  constructor() {}
   
   tagNum = 0;
   visible = true;
@@ -33,23 +42,22 @@ export class ChipInputComponent {
   // For display
   tagsList: Tag[] = [];
 
-  tags = {};
-
-
   add(event: MatChipInputEvent): void {
     const input = event.input;
     const value = event.value;
 
     // Add tag
     if ((value || '').trim()) {
+      let tagName = 'tag' + this.tagNum;
       this.tagsList.push({name: value.trim()});
+
     }
     
     // Reset the input value
     if (input) {
       input.value = '';
     }
-
+    this.tagsOutput.emit(this.tagsList);
     
   }
 
@@ -58,7 +66,9 @@ export class ChipInputComponent {
 
     if (index >= 0) {
       this.tagsList.splice(index, 1);
+      this.tagNum--;
     }
+    this.tagsOutput.emit(this.tagsList);
   }
 
 }

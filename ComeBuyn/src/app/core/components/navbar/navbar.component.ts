@@ -26,7 +26,6 @@ export class NavbarComponent
 
   toggleNavbar() {
     this.navbarOpen = !this.navbarOpen;
-    console.log(this.navbarOpen)
   }
 
   login(){
