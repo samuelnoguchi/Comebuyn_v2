@@ -22,7 +22,7 @@ export class SearchResultsComponent {
     });
   }
 
-  // Determine if product matches search query ... todo: speed up this search
+  // Determine if product matches search query ... todo: speed up this search, O(n^4) n=all products in db i think
   filter(products){
     let productList = [];
     let queryItems = this.query.toLowerCase().split(" ");
