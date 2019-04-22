@@ -25,11 +25,16 @@ export class SearchResultsComponent {
   // Determine if product matches search query ... todo: speed up this search
   filter(products){
     let productList = [];
+    let queryItems = this.query.toLowerCase().split(" ");
     for(let product of products){
       let tags = product.tags;
       // Super slow
-      if (tags && Object.values(tags).includes(this.query)){
-        productList.push(product);    
+      for (let queryItem of queryItems){
+        if (tags && Object.values(tags).includes(queryItem)){
+          if(!productList.includes(product)){
+            productList.push(product);  
+          }   
+        }
       }
     }
     return productList;

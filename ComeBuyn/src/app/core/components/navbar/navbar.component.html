@@ -8,7 +8,7 @@
   <div class="collapse navbar-collapse" [class.show]="navbarOpen"  id="navbarsExampleDefault">
   
     <div class="search-bar form-inline">
-      <input (keyup.enter)="search(searchContent)" #searchContent name="search" id="search" type="text" class="form-control"> 
+      <input (keyup.enter)="search(searchContent)" #searchContent name="search" id="search" type="text" class="form-control" placeholder="Search for a product..."> 
       <button (click)="search(searchContent)" class="btn btn-primary">Search</button>
     </div>
     

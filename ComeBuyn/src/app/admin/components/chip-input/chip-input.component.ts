@@ -49,8 +49,7 @@ export class ChipInputComponent implements OnChanges {
     // Add tag
     if ((value || '').trim()) {
       let tagName = 'tag' + this.tagNum;
-      this.tagsList.push({name: value.trim()});
-
+      this.tagsList.push({name: value.trim().toLowerCase()});
     }
     
     // Reset the input value
