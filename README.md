@@ -46,7 +46,7 @@ firebase deploy
 3. ~~Search bar~~
 4. ~~Popular products~~
 5. Leave circle?
-6. Shipping info
+6. ~~Shipping info~~
 
 
 ## Styling
