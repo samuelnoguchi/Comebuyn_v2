@@ -1,10 +1,9 @@
 <div>
   
-  <h1> Product name: {{ order.product.title }} </h1>
+  <h1> Product name: 
+    <a *ngIf="order.productId" [routerLink]="['/admin/products/', order.productId ]"> {{ order.product.title }}</a>
+  </h1>
   <h2> OrderId: {{ id }} </h2>
-  
-  <a *ngIf="order.productId" [routerLink]="['/admin/products/', order.productId ]"> View Product </a>
-  
   <table class="table">
     <thead>
         <tr>
@@ -14,7 +13,6 @@
             <th>Country</th>
             <th>State</th>
             <th>Zip Code</th>
-            
         </tr>
     </thead>
     <tbody>

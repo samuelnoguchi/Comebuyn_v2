@@ -43,8 +43,6 @@ export class OrderFormComponent {
         this.buyerIds.push(buyer['id']);
         this.shippingInfo.push(buyer['shippingInfo']);
       }
-
-      
     });
   }
 
