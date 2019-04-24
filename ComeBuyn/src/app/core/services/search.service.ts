@@ -10,6 +10,8 @@ export class SearchService {
   constructor(private router:Router) { }
 
   search(searchContent:string){
-    this.router.navigate(['/search-results', searchContent]);
+    if(searchContent){
+      this.router.navigate(['/search-results', searchContent]);
+    }
   }
 }

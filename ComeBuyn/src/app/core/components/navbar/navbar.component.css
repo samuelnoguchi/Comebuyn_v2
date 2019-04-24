@@ -6,9 +6,6 @@
     cursor: pointer;
 }
 
-.search-bar{
-}
-
 button {
     padding-left: 16px;
     padding-right: 16px;
@@ -18,7 +15,10 @@ button {
     border-top-right-radius: 16px;
     border-bottom-right-radius: 16px;
     border-top-left-radius: 0px;
-    border-bottom-left-radius: 0px;
+	border-bottom-left-radius: 0px;
+	height: 30px;
+	padding-top:0px;
+	padding-bottom:0px;
 }
 
 .search{
@@ -28,7 +28,8 @@ button {
     border-bottom-right-radius: 0px;
     background: white;
     color: black;
-    border:2px solid rgba(240, 240, 240, 0.5);
+	border:2px solid rgba(240, 240, 240, 0.5);
+	height: 30px;
 }
 
 .dropdown-heading{
