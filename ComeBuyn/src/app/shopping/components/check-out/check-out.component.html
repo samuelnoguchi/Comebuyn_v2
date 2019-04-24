@@ -91,6 +91,7 @@
       </div>
       <hr class="mb-4">
       <h4 class="mb-3">Payment</h4>
+      <ngx-paypal [config]="payPalConfig"></ngx-paypal>
       <hr class="mb-4">
       <button [disabled]="f.invalid" class="btn btn-primary btn-lg btn-block">Join Circle</button>
     </form>

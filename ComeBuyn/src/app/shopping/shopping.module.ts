@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { AuthGuard } from 'shared/services/auth-guard.service';
 import { SharedModule } from 'shared/shared.module';
+import { NgxPayPalModule } from 'ngx-paypal';
 
 import { MyOrdersComponent } from './components/my-orders/my-orders.component';
 import { OrderSuccessComponent } from './components/order-success/order-success.component';
@@ -33,6 +34,7 @@ import { SearchResultsComponent } from './components/search-results/search-resul
   ],
   imports: [
     SharedModule,
+    NgxPayPalModule,
     RouterModule.forChild([
       { path: 'product-page', component: ProductPageComponent },
       { path: 'product-page/:productId', component: ProductPageComponent },
