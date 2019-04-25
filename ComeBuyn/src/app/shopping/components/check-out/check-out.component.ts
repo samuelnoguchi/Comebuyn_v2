@@ -13,9 +13,10 @@ import { IPayPalConfig, ICreateOrderRequest } from 'ngx-paypal';
   templateUrl: './check-out.component.html',
   styleUrls: ['./check-out.component.css']
 })
-export class CheckOutComponent implements OnDestroy, OnInit {
+export class CheckOutComponent implements OnDestroy {
 
   public payPalConfig?: IPayPalConfig;
+  paid:boolean;
 
   product:Product= {
     $key:null,
@@ -40,9 +41,7 @@ export class CheckOutComponent implements OnDestroy, OnInit {
   tax:number;
   total:number;
 
-  ngOnInit(): void {
-    
-  }
+
 
   constructor(
     private productService: ProductService, 
@@ -51,6 +50,8 @@ export class CheckOutComponent implements OnDestroy, OnInit {
     private router: Router
     ) {
     
+    this.paid = false;
+
     // Subscribe to get the route parameters 
     this.paramSub = route.queryParams.subscribe(params => {
     this.productId = params.productId;
@@ -133,7 +134,7 @@ export class CheckOutComponent implements OnDestroy, OnInit {
     },
     onClientAuthorization: (data) => {
       console.log('onClientAuthorization - you should probably inform your server about completed transaction at this point', data);
-      //this.showSuccess = true;
+      this.paid = true;
     },
     onCancel: (data, actions) => {
       console.log('OnCancel', data, actions);
