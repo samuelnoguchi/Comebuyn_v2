@@ -5,13 +5,29 @@
     
     <div class="row">
       <div class = "col-md-4 nopadding">
-        <img class="featurette-image img-fluid mx-auto" [src]="image">
+        <a (click)="changeFocus(0)">
+            <img 
+            class="featurette-image img-fluid mx-auto" 
+            [class.image-focus]="focusNumber == 0" 
+            [src]="image">
+        </a>
       </div>
       <div class = "col-md-4 nopadding">
-        <img class="featurette-image img-fluid mx-auto" [src]="image">
+        <a (click)="changeFocus(1)">
+          <img 
+            class="featurette-image img-fluid mx-auto" 
+            [class.image-focus]="focusNumber == 1" 
+            [src]="image" >
+        </a>
+        
       </div>
       <div class = "col-md-4 nopadding">
-        <img class="featurette-image img-fluid mx-auto" [src]="image">
+        <a (click)="changeFocus(2)">
+          <img 
+          class="featurette-image img-fluid mx-auto" 
+          [class.image-focus]="focusNumber == 2" 
+          [src]="image">
+        </a>
       </div>
     </div>
   </div>  

@@ -8,10 +8,23 @@ import { Component, OnInit, Input } from '@angular/core';
 export class ImageViewerComponent implements OnInit {
 
   @Input() image: string;
+  imageList: string[];
+  focusNumber:number;
 
-  constructor() { }
+  constructor() {
+    this.focusNumber = 0;
+
+    this.imageList = [];
+    this.imageList.push(this.image);
+    this.imageList.push(this.image);
+    this.imageList.push(this.image);
+  }
 
   ngOnInit() {
+  }
+
+  changeFocus(num:number){
+    this.focusNumber = num;
   }
 
 }
