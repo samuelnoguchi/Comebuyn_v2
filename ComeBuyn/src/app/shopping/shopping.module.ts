@@ -16,6 +16,7 @@ import { PopularProductsComponent } from './components/popular-products/popular-
 import { HomeComponent } from './components/home/home.component';
 import { ShippedOrdersComponent } from './components/shipped-orders/shipped-orders.component';
 import { SearchResultsComponent } from './components/search-results/search-results.component';
+import { ImageViewerComponent } from './components/image-viewer/image-viewer.component';
 
 @NgModule({
   declarations: [
@@ -30,7 +31,8 @@ import { SearchResultsComponent } from './components/search-results/search-resul
     PopularProductsComponent,
     HomeComponent,
     ShippedOrdersComponent,
-    SearchResultsComponent
+    SearchResultsComponent,
+    ImageViewerComponent
   ],
   imports: [
     SharedModule,

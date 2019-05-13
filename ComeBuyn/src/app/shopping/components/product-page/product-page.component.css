@@ -4,17 +4,21 @@
     font-weight:bold;
 }
 
-.product-image{
-    
-    padding:10%;
-}
-
 .join{
     margin-top: 2%;
     border-radius: 25px;
-    
 }
 
 .flex-container {
     display: flex;
-  }
+}
+
+.border-light {
+    border: 2px solid gray;
+}
+
+.nopadding {
+    padding: 0 !important;
+    margin: 0 !important;
+ }
+

@@ -1,9 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { AppUser } from 'shared/models/app-user';
 import { Product } from 'shared/models/product';
 import { Observable } from 'rxjs';
 import { AuthService } from 'shared/services/auth.service';
 import { ProductService } from 'shared/services/product.service';
+import { DisplayOrder } from 'shared/models/display-order';
 
 @Component({
   selector: 'active-circles',
@@ -11,13 +12,12 @@ import { ProductService } from 'shared/services/product.service';
   styleUrls: ['./active-circles.component.css']
 })
 export class ActiveCirclesComponent {
-
   appUser:AppUser;
-  
   circles:string[];
   quantities:number[];
   activeCircles:Product[] =[];
   activeCircles$:[Observable<Product>];
+
 
 
   constructor(private auth: AuthService, private productService: ProductService) { 
