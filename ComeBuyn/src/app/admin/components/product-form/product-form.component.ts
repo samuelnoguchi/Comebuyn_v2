@@ -24,6 +24,7 @@ export class ProductFormComponent implements OnInit {
     tags: {},
     price:null,
     imageUrl:null,
+    images: {},
     title:null
   };
 

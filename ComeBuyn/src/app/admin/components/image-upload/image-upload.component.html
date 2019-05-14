@@ -1,18 +1,25 @@
 <div class="image-upload">
     <input type="file" (change)="fileChangeEvent($event)" />
 
-    <image-cropper
-        [imageChangedEvent]="imageChangedEvent"
-        [maintainAspectRatio]="true"
-        [aspectRatio]="4 / 4"
-        [resizeToWidth]="256"
-        format="png"
-        (imageCropped)="imageCropped($event)"
-        (imageLoaded)="imageLoaded($event)"
-        >
-    </image-cropper>    
+    <img *ngIf="productImage" class="img-small" [src]="productImage">
+
+    <div class= "row">
+        <div class= "col-md-6">
+            <image-cropper
+            [imageChangedEvent]="imageChangedEvent"
+            [maintainAspectRatio]="true"
+            [aspectRatio]="4 / 4"
+            [resizeToWidth]="256"
+            format="png"
+            (imageCropped)="imageCropped($event)"
+            (imageLoaded)="imageLoaded($event)">
+            </image-cropper>    
+        </div>
+    </div>
+    
+
+    
     <button *ngIf="this.imagePresent" (click)="cropImage()" class="btn btn-primary" type="button">
         Crop
     </button>
-
 </div>

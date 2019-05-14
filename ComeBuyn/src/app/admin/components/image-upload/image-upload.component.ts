@@ -1,4 +1,4 @@
-import { Component, OnInit, Output, EventEmitter, ViewChild } from '@angular/core';
+import { Component, OnInit, Output, Input, EventEmitter, ViewChild, SimpleChanges } from '@angular/core';
 import { ImageCroppedEvent } from 'ngx-image-cropper';
 import { AngularFireDatabase } from '@angular/fire/database';
 import { Router } from '@angular/router';
@@ -11,24 +11,29 @@ import { ImageCropperComponent } from 'ngx-image-cropper';
 })
 export class ImageUploadComponent {
     
+  @Input() imageInput:string; // If an image has already been uploaded
   @Output() image = new EventEmitter<string>();
   @ViewChild(ImageCropperComponent) imageCropper: ImageCropperComponent;
+
+  productImage: string = null;
 
   imagePresent: boolean = false;
   imageChangedEvent: any = '';
   croppedImage: any = '';
 
-  test = null;
+  constructor(private db: AngularFireDatabase, private router: Router) {
+  }
 
-  constructor(private db: AngularFireDatabase, private router: Router) { }
+  ngOnChanges(changes: SimpleChanges) {
+    this.productImage = changes.imageInput.currentValue;
+  }
 
   fileChangeEvent(event: any): void {
       this.imageChangedEvent = event;
   }
 
   imageCropped(event: ImageCroppedEvent) {
-      this.croppedImage = event.base64;
-      
+      this.croppedImage = event.base64;  
   }
 
   imageLoaded(){
@@ -36,9 +41,10 @@ export class ImageUploadComponent {
   }
 
   cropImage(){
-    this.image.emit(this.croppedImage);
-    console.log(this.croppedImage);
-    this.imageCropper.imageFileChanged = null;
+    this.productImage = this.croppedImage;
+    this.image.emit(this.productImage);
+    this.imageCropper.imageFileChanged = null; //Reset uploader
+    this.imagePresent = false;
   }
 
 }

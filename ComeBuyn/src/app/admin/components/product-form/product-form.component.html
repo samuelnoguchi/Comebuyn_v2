@@ -46,7 +46,9 @@
         [productTags]="tags">
       </chip-input>
       
+      <div class="label-image">Upload Image 1</div>
       <image-upload
+        [imageInput] = "product.imageUrl"
         (image)="getImage($event)">
       </image-upload>
     </div>

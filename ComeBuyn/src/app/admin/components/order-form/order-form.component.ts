@@ -24,6 +24,7 @@ export class OrderFormComponent {
       tags: {},
       price:null,
       imageUrl:null,
+      images: {},
       title:null
     }
   };

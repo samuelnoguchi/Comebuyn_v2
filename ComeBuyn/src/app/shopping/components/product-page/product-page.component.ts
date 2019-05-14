@@ -10,6 +10,8 @@ import { ActivatedRoute, Router } from '@angular/router';
 })
 export class ProductPageComponent {
 
+  
+
   productId: string;
   product:Product={
     $key:null,
@@ -21,8 +23,10 @@ export class ProductPageComponent {
     tags:{},
     price:null,
     imageUrl:null,
+    images:{},
     title:null
   };
+
   numAvailable:number[];
   image:string;
   quantitySelection: number;
