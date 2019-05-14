@@ -1,32 +1,32 @@
 <div class="product-image">
     <div class="img-holder-main">
-      <img class="img-main" [src]="image" alt="Loading...">
+      <img class="img-main" [src]="focusImage">
     </div>
     
-    <div class="row">
+    <div *ngIf="imageList[0]" class="row">
       <div class = "col-md-4 nopadding">
         <a (click)="changeFocus(0)">
             <img 
             class="featurette-image img-fluid mx-auto" 
             [class.image-focus]="focusNumber == 0" 
-            [src]="image">
+            [src]="imageList[0]">
         </a>
       </div>
-      <div class = "col-md-4 nopadding">
+      <div *ngIf="imageList[1]" class = "col-md-4 nopadding">
         <a (click)="changeFocus(1)">
           <img 
             class="featurette-image img-fluid mx-auto" 
             [class.image-focus]="focusNumber == 1" 
-            [src]="image" >
+            [src]="imageList[1]" >
         </a>
         
       </div>
-      <div class = "col-md-4 nopadding">
+      <div *ngIf="imageList[2]" class = "col-md-4 nopadding">
         <a (click)="changeFocus(2)">
           <img 
           class="featurette-image img-fluid mx-auto" 
           [class.image-focus]="focusNumber == 2" 
-          [src]="image">
+          [src]="imageList[2]">
         </a>
       </div>
     </div>

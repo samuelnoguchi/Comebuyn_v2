@@ -10,8 +10,6 @@ import { ActivatedRoute, Router } from '@angular/router';
 })
 export class ProductPageComponent {
 
-  
-
   productId: string;
   product:Product={
     $key:null,
@@ -28,8 +26,8 @@ export class ProductPageComponent {
   };
 
   numAvailable:number[];
-  image:string;
   quantitySelection: number;
+  images = new Array(3).fill(null);
 
 
   constructor(private productService: ProductService, private route: ActivatedRoute, private router:Router) { 
@@ -40,15 +38,20 @@ export class ProductPageComponent {
 
       // Set defaults
       this.quantitySelection = 1;
-      this.image = "https://increasify.com.au/wp-content/uploads/2016/08/default-image.png" // default
 
       // Get the product
       productService.get(this.productId).valueChanges().subscribe(
         product=> {
           this.product = product;
-          this.image = this.product.imageUrl;
           this.numAvailable = Array(this.product.numBuyersRequired-this.product.numBuyers).fill(0).map((x,i)=>i+1);
-       
+        
+          if(product.images){
+            let imageNum = 0;
+            for(let img of Object.values(product.images)){
+              this.images[imageNum] = img;
+              imageNum++;
+            }
+          }  
         }
       );
     }

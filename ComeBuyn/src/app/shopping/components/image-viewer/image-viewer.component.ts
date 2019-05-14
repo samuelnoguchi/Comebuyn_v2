@@ -1,30 +1,29 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, Input, SimpleChanges } from '@angular/core';
 
 @Component({
   selector: 'image-viewer',
   templateUrl: './image-viewer.component.html',
   styleUrls: ['./image-viewer.component.css']
 })
-export class ImageViewerComponent implements OnInit {
+export class ImageViewerComponent {
 
-  @Input() image: string;
-  imageList: string[];
+  @Input() images;
+  imageList =  new Array(3).fill(null);
   focusNumber:number;
+  focusImage:string;
 
   constructor() {
     this.focusNumber = 0;
-
-    this.imageList = [];
-    this.imageList.push(this.image);
-    this.imageList.push(this.image);
-    this.imageList.push(this.image);
   }
 
-  ngOnInit() {
+  ngOnChanges(changes: SimpleChanges) {
+    this.imageList = changes.images.currentValue;
+    this.focusImage = this.imageList[0]
   }
 
   changeFocus(num:number){
     this.focusNumber = num;
+    this.focusImage = this.imageList[this.focusNumber];
   }
 
 }
