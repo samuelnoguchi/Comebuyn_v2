@@ -42,7 +42,7 @@ export class ProductFormComponent implements OnInit {
     this.categories$ = categoryService.getAll();
 
     this.id = this.route.snapshot.paramMap.get('id');
-    if (this.id) this.productService.get(this.id).valueChanges().take(1)
+    if (this.id){ this.productService.get(this.id).valueChanges().take(1)
       .subscribe(p=> {
         this.product = p;
         this.tags = p.tags;
@@ -56,6 +56,10 @@ export class ProductFormComponent implements OnInit {
           }
         }
       });
+    }
+    else{
+      this.product.title = null;
+    }
   }
 
   getTags(tags: []){
