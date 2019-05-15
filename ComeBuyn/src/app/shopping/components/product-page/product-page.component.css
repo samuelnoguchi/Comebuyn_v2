@@ -1,7 +1,17 @@
-.product-price{
+.price{
     margin-top: 2%;
     margin-bottom: 2%;
+}
+
+.product-price{
+    
     font-weight:bold;
+}
+
+
+.product-original-price{
+    color: gray;
+    text-decoration: line-through;
 }
 
 .join{

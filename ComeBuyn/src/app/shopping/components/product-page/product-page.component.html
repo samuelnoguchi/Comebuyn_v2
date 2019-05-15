@@ -6,9 +6,15 @@
     <p><ngb-progressbar type="primary" [value]="product.numBuyers / product.numBuyersRequired * 100"></ngb-progressbar></p>
     <hr>
     
-    <div class="product-price">{{ product.price | currency:'USD':true }} </div>
+    <div class="price">
+      <div class="product-price">{{ product.price | currency:'USD':true }} </div>
+      <div class="product-original-price">{{ product.originalPrice | currency:'USD':true }} </div>
+    </div>
 
-    <p>{{ product.description }}</p>
+    <div>
+      <p>{{ product.description }}</p>
+    </div>
+    
 
     <div class="join">
         
