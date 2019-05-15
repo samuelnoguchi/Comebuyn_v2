@@ -11,19 +11,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 export class ProductPageComponent {
 
   productId: string;
-  product:Product={
-    $key:null,
-    category:null,
-    numBuyers:null,
-    description:null,
-    numBuyersRequired:null,
-    buyers:null,
-    tags:{},
-    price:null,
-    imageUrl:null,
-    images:{},
-    title:null
-  };
+  product:Product;
 
   numAvailable:number[];
   quantitySelection: number;
