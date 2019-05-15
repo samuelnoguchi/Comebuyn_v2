@@ -9,5 +9,6 @@ export interface Product {
     buyers: {}
     tags: {}
     price: number
+    originalPrice: number
     title: string    
 }

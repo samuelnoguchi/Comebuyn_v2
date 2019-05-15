@@ -18,19 +18,7 @@ export class CheckOutComponent implements OnDestroy {
   public payPalConfig?: IPayPalConfig;
   paid:boolean;
 
-  product:Product= {
-    $key:null,
-    category:null,
-    numBuyers:null,
-    numBuyersRequired:null,
-    price:null,
-    description:null,
-    buyers:{},
-    tags:{},
-    imageUrl:null,
-    images: {},
-    title:null
-  };
+  product:Product;
 
   quantity:number;
   productId:string;

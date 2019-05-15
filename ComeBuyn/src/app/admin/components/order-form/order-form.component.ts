@@ -12,23 +12,7 @@ import { ShippingInfo } from 'shared/models/shipping-info';
 
 export class OrderFormComponent {
   id;
-  order:Order = {
-    productId:null,
-    product:{
-      $key:null,
-      category:null,
-      numBuyers:null,
-      description:null,
-      numBuyersRequired:null,
-      buyers: {},
-      tags: {},
-      price:null,
-      imageUrl:null,
-      images: {},
-      title:null
-    }
-  };
-
+  order:Order;
   buyerIds:any[]=[];
   shippingInfo:ShippingInfo[]=[];
 

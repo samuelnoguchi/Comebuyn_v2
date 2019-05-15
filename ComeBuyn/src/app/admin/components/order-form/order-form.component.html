@@ -1,4 +1,4 @@
-<div>
+<div *ngIf="order">
   
   <h1> Product name: 
     <a *ngIf="order.productId" [routerLink]="['/admin/products/', order.productId ]"> {{ order.product.title }}</a>
