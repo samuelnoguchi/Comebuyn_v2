@@ -58,22 +58,28 @@
         (tagsOutput)="getTags($event)"
         [productTags]="tags">
       </chip-input>
+      <div>
+        <div class="label-image">Upload Image 1</div>
+        <image-upload
+          [imageInput] = "images[0]"
+          (image)="getImage($event, 0)">
+        </image-upload>
+      </div>
+      <div *ngIf="numImages > 0">
+        <div class="label-image">Upload Image 2</div>
+        <image-upload
+          [imageInput] = "images[1]"
+          (image)="getImage($event, 1)">
+        </image-upload>
+      </div>
+      <div *ngIf="numImages > 1">
+        <div class="label-image">Upload Image 3</div>
+        <image-upload
+          [imageInput] = "images[2]"
+          (image)="getImage($event, 2)">
+        </image-upload>
+      </div>
       
-      <div class="label-image">Upload Image 1</div>
-      <image-upload
-        [imageInput] = "images[0]"
-        (image)="getImage($event, 0)">
-      </image-upload>
-      <div class="label-image">Upload Image 2</div>
-      <image-upload
-        [imageInput] = "images[1]"
-        (image)="getImage($event, 1)">
-      </image-upload>
-      <div class="label-image">Upload Image 3</div>
-      <image-upload
-        [imageInput] = "images[2]"
-        (image)="getImage($event, 2)">
-      </image-upload>
     </div>
   </div>
   <button class="btn btn-primary">Save</button>
