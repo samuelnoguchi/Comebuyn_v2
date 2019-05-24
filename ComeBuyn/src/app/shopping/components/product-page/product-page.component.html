@@ -1,41 +1,45 @@
 <div *ngIf="product">
-<div class="row featurette">
-  <div class="col-md-7">
-    <h2 class="featurette-heading"> {{ product.title }} </h2>
-    <p class="lead"> {{ product.category }}  </p>
-    <p><ngb-progressbar type="primary" [value]="product.numBuyers / product.numBuyersRequired * 100"></ngb-progressbar></p>
-    <hr>
-    
-    <div class="price">
-      <div class="product-price">{{ product.price | currency:'USD':true }} </div>
-      <div class="product-original-price">{{ product.originalPrice | currency:'USD':true }} </div>
-    </div>
-
-    <div>
-      <p>{{ product.description }}</p>
-    </div>
-    
-
-    <div class="join">
-        
-        <p>Users currently in circle:  <b> {{ product.numBuyers }} / {{ product.numBuyersRequired }} </b> </p>
+  <div class="row featurette">
+    <div class="col-md-7">
+      <h2 class="featurette-heading"> {{ product.title }} </h2>
+      <p class="lead"> {{ product.category }}  </p>
+      <p><ngb-progressbar type="primary" [value]="product.numBuyers / product.numBuyersRequired * 100"></ngb-progressbar></p>
+      <hr>
       
-      <form #f="ngForm" (ngSubmit)="checkout(f.value)">
-        <div class="form-group">
-          <label for="quantity">Quantity</label>
-          <select #quantity="ngModel" [(ngModel)]="quantitySelection" name="quantity" id="quantity" class="form-control" required>
-            <option *ngFor="let num of numAvailable" [value]="num">{{ num }}</option>
-          </select>
-        </div>
-        <button class="btn btn-primary btn-lg btn-block">Join Circle</button>
-      </form>
+      <div class="price">
+        <div class="product-price">{{ product.price | currency:'USD':true }} </div>
+        <div class="product-original-price">{{ product.originalPrice | currency:'USD':true }} </div>
+      </div>
+
+      <div>
+        <p>{{ product.description }}</p>
+      </div>
+      
+
+      <div class="join">
+          
+          <p>Users currently in circle:  <b> {{ product.numBuyers }} / {{ product.numBuyersRequired }} </b> </p>
+        
+        <form #f="ngForm" (ngSubmit)="checkout(f.value)">
+          <div class="form-group">
+            <label for="quantity">Quantity</label>
+            <select #quantity="ngModel" [(ngModel)]="quantitySelection" name="quantity" id="quantity" class="form-control" required>
+              <option *ngFor="let num of numAvailable" [value]="num">{{ num }}</option>
+            </select>
+          </div>
+          <button class="btn btn-primary btn-lg btn-block">Join Circle</button>
+        </form>
+      </div>
+    </div>
+    <div class="col-md-5">
+      <image-viewer
+        [images]="[images[0], images[1], images[2]]"
+      ></image-viewer>
     </div>
   </div>
-  <div class="col-md-5">
-    <image-viewer
-      [images]="[images[0], images[1], images[2]]"
-    ></image-viewer>
-  </div>
-</div>
+  <similar-products></similar-products>
+
+
+
 </div>
 

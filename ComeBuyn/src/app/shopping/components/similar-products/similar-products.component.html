@@ -1,0 +1,16 @@
+<div class="similar-products">
+  <div class="vertical-center">
+    <h3>Similar Products</h3>
+  </div>
+  <div class="products">
+    <div class="album bg-light">
+      <div class="container">
+        <div class="row">
+          <div *ngFor="let p of products$ | async" class="col-md-3 d-flex align-items-stretch">
+            <product-card [product]="p"></product-card>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

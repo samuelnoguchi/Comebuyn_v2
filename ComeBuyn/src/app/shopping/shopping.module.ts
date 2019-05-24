@@ -17,6 +17,7 @@ import { HomeComponent } from './components/home/home.component';
 import { ShippedOrdersComponent } from './components/shipped-orders/shipped-orders.component';
 import { SearchResultsComponent } from './components/search-results/search-results.component';
 import { ImageViewerComponent } from './components/image-viewer/image-viewer.component';
+import { SimilarProductsComponent } from './components/similar-products/similar-products.component';
 
 @NgModule({
   declarations: [
@@ -32,7 +33,8 @@ import { ImageViewerComponent } from './components/image-viewer/image-viewer.com
     HomeComponent,
     ShippedOrdersComponent,
     SearchResultsComponent,
-    ImageViewerComponent
+    ImageViewerComponent,
+    SimilarProductsComponent
   ],
   imports: [
     SharedModule,

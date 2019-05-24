@@ -12,7 +12,4 @@ export class PopularProductsComponent {
   constructor(private productService:ProductService) { 
     this.products$ = productService.getPopular();
   }
-
-  
-
 }
